@@ -209,16 +209,68 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
 #s-report h2{font-size:22px;font-weight:600;margin-bottom:4px}
 .rep-date{font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:20px}
 
-/* Score hero — equal two-column layout */
-.rep-scores-hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.rep-score-hero-card{border-radius:14px;padding:22px;text-align:center}
-.rep-score-hero-num{font-size:54px;font-weight:700;line-height:1}
-.rep-score-hero-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-top:6px;opacity:0.5}
-.rep-score-hero-interp{font-size:12px;line-height:1.65;margin-top:10px;opacity:0.65;text-align:left}
-.rep-metric-pill{display:inline-block;font-size:10px;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05);border-radius:6px;padding:3px 8px;margin-top:4px;line-height:1.5}
+/* ── REPORT PAGE SYSTEM ── */
+.rep-page{display:none}
+.rep-page.active{display:block}
+.rep-page-nav{display:flex;align-items:center;justify-content:space-between;margin:20px 0 24px;gap:12px}
+.rep-page-dots{display:flex;gap:8px;align-items:center}
+.rep-page-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);transition:all .25s;cursor:pointer}
+.rep-page-dot.active{width:22px;border-radius:4px;background:#6C63FF}
+.rep-page-btn{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:9px;padding:8px 18px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);cursor:pointer;transition:all .2s}
+.rep-page-btn:hover{background:rgba(108,99,255,0.15);border-color:#6C63FF;color:#fff}
+.rep-page-btn:disabled{opacity:0.2;cursor:default}
 
-/* Score cards */
-.rep-scores{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+/* ── THRIVE SCORE METER ── */
+.ts-meter-wrap{margin:16px 0 10px;display:flex;flex-direction:column;align-items:center}
+.ts-meter-svg{width:100%;max-width:340px;height:auto}
+.ts-meter-label{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px;text-align:center;letter-spacing:.04em}
+
+/* ── BALANCE SCORE RING ── */
+.bs-ring-wrap{display:flex;flex-direction:column;align-items:center;margin:16px 0 8px}
+.bs-ring-svg{width:140px;height:140px}
+.bs-balance-line{font-size:11px;color:rgba(91,200,245,0.6);text-align:center;line-height:1.6;margin-top:6px;font-style:italic;max-width:240px}
+
+/* ── SCORE HERO — PAGE 1 ── */
+.rep-score-hero-card{border-radius:14px;padding:20px 18px;position:relative;overflow:hidden}
+.rep-scores-hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.rep-score-hero-num{font-size:48px;font-weight:700;line-height:1;text-align:center}
+.rep-score-hero-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-top:4px;opacity:0.45;text-align:center}
+.rep-score-hero-interp{font-size:11px;line-height:1.65;margin-top:10px;opacity:0.6;text-align:left}
+
+/* ── MOMENTUM SCORE CARD ── */
+.rep-ms-card{background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+.rep-ms-row{display:flex;align-items:center;gap:14px}
+.rep-ms-icon-wrap{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
+.rep-ms-content{flex:1}
+.rep-ms-val{font-size:28px;font-weight:700;line-height:1}
+.rep-ms-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.3);margin-top:2px}
+.rep-ms-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:7px;line-height:1.65}
+.rep-ms-desc strong{color:rgba(255,255,255,0.75);display:block;margin-top:5px}
+
+/* ── CRISIS FLAG GRAPHIC ── */
+.rep-cf-card{border-radius:12px;padding:16px 18px;margin-bottom:10px}
+.rep-cf-card.cf-none{background:rgba(46,204,113,0.06);border:0.5px solid rgba(46,204,113,0.2)}
+.rep-cf-card.cf-active{background:rgba(255,77,77,0.07);border:0.5px solid rgba(255,77,77,0.3)}
+.rep-cf-flag-row{display:flex;align-items:center;gap:14px}
+.rep-cf-flag-svg{flex-shrink:0}
+.rep-cf-flag-content{flex:1}
+.rep-cf-flag-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.rep-cf-flag-sub{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6}
+.rep-cf-domains{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.rep-cf-domain-tag{font-size:11px;font-weight:600;padding:4px 11px;border-radius:7px;background:rgba(255,77,77,0.14);color:#FF4D4D;border:0.5px solid rgba(255,77,77,0.3)}
+
+/* ── PAGE 2 DOMAIN PREVIEW ── */
+.rep-p2-intro{font-size:15px;font-weight:600;color:#fff;margin-bottom:5px;line-height:1.4}
+.rep-p2-sub{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;line-height:1.65}
+.rep-p2-section-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;margin-bottom:10px}
+
+/* ── GATE GRAPHICS ── */
+.rep-gate-graphic{width:100%;margin-bottom:22px;border-radius:12px;overflow:hidden;position:relative}
+.rep-gate-graphic svg{display:block;width:100%;height:auto}
+.rep-gate-dots-bg{position:absolute;inset:0;opacity:0.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+
+/* Score cards — small */
+.rep-scores{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .rep-score-card{background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);border-radius:10px;padding:13px}
 .rep-score-val{font-size:26px;font-weight:600;color:#fff}
 .rep-score-lbl{font-size:10px;color:rgba(255,255,255,0.32);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
@@ -296,7 +348,63 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
 .rep-watch-q{font-size:11px;color:rgba(255,179,71,0.75);margin-top:5px;font-style:italic;line-height:1.55}
 .rep-watch-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:5px;background:rgba(255,179,71,0.12);color:#FFB347;flex-shrink:0;margin-top:2px}
 
-.fp-badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.04em}
+/* ── TWO-TIER GATE SYSTEM ── */
+
+/* Tier 1 wrapper — always visible */
+#rep-tier1{margin-bottom:0}
+
+/* Blurred teaser card */
+.rep-teaser-card{position:relative;border-radius:11px;overflow:hidden;margin-bottom:8px}
+.rep-teaser-card-inner{filter:blur(4px);opacity:0.45;pointer-events:none;user-select:none}
+.rep-teaser-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,10,15,0) 0%,rgba(10,10,15,0.6) 100%)}
+.rep-teaser-lock{font-size:11px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);border:0.5px solid rgba(255,255,255,0.12);border-radius:20px;padding:5px 12px}
+
+/* More domains pill */
+.rep-more-pill{text-align:center;padding:12px;border-radius:10px;border:0.5px dashed rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:22px;letter-spacing:.02em}
+.rep-more-pill strong{color:rgba(108,99,255,0.8)}
+
+/* ── GATE BLOCK ── */
+.rep-gate{background:linear-gradient(145deg,rgba(108,99,255,0.08) 0%,rgba(10,10,20,0) 100%);border:0.5px solid rgba(108,99,255,0.3);border-radius:16px;padding:28px 24px;margin:8px 0 28px;position:relative;overflow:hidden}
+.rep-gate::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(108,99,255,0.12) 0%,transparent 70%);pointer-events:none}
+.rep-gate-eyebrow{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6C63FF;margin-bottom:10px}
+.rep-gate-headline{font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px}
+.rep-gate-sub{font-size:13px;color:rgba(255,255,255,0.42);line-height:1.7;margin-bottom:20px}
+.rep-gate-value{display:inline-flex;align-items:center;gap:7px;background:rgba(46,204,113,0.1);border:0.5px solid rgba(46,204,113,0.3);border-radius:8px;padding:6px 12px;font-size:11px;color:rgba(46,204,113,0.9);margin-bottom:20px}
+.rep-gate-value s{color:rgba(255,255,255,0.3);text-decoration:line-through}
+
+/* What's inside teaser list */
+.rep-gate-teasers{margin-bottom:24px}
+.rep-gate-teasers-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:rgba(255,255,255,0.25);margin-bottom:10px}
+.rep-gate-teaser-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:0.5px solid rgba(255,255,255,0.04)}
+.rep-gate-teaser-item:last-child{border-bottom:none}
+.rep-gate-teaser-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.rep-gate-teaser-text{flex:1}
+.rep-gate-teaser-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.75)}
+.rep-gate-teaser-desc{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px;line-height:1.5}
+.rep-gate-teaser-hook{font-size:10px;color:#6C63FF;margin-top:2px;font-style:italic}
+
+/* Email CTA */
+.rep-gate-cta{margin-bottom:16px}
+.rep-gate-cta-label{font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:8px;line-height:1.5}
+.rep-gate-input-row{display:flex;gap:8px}
+.rep-gate-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;font-size:13px;color:#fff;outline:none;transition:border-color .2s}
+.rep-gate-input:focus{border-color:#6C63FF}
+.rep-gate-input::placeholder{color:rgba(255,255,255,0.25)}
+.rep-gate-btn{background:#6C63FF;color:#fff;border:none;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;box-shadow:0 0 24px rgba(108,99,255,0.35)}
+.rep-gate-btn:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 32px rgba(108,99,255,0.5)}
+.rep-gate-privacy{font-size:10px;color:rgba(255,255,255,0.2);margin-top:7px;line-height:1.5}
+
+/* Paid secondary option */
+.rep-gate-paid{text-align:center;margin-top:4px}
+.rep-gate-paid-link{font-size:11px;color:rgba(255,255,255,0.25);cursor:pointer;transition:color .2s;background:none;border:none;padding:4px;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.1)}
+.rep-gate-paid-link:hover{color:rgba(255,255,255,0.5)}
+
+/* Unlock success banner */
+.rep-unlock-banner{background:rgba(46,204,113,0.1);border:0.5px solid rgba(46,204,113,0.3);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(46,204,113,0.9);line-height:1.5}
+
+/* Tier 2 — hidden until unlock */
+#rep-tier2{display:none}
+#rep-tier2.unlocked{display:block}
 .z-red{background:rgba(255,77,77,0.18);color:#FF4D4D}
 .z-amber{background:rgba(255,179,71,0.18);color:#FFB347}
 .z-green{background:rgba(46,204,113,0.15);color:#2ECC71}
@@ -454,66 +562,176 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
 
 <!-- ── REPORT ── -->
 <div id="s-report" class="screen">
-  <h2>Your Thrive Report</h2>
-  <div class="rep-date" id="rep-date"></div>
+  <div class="step-wrap" style="max-width:720px;margin:0 auto;width:100%;padding-bottom:40px">
 
-  <!-- Score hero: Thrive + Balance equal prominence -->
-  <div class="rep-scores-hero">
-    <div class="rep-score-hero-card" style="background:rgba(108,99,255,0.09);border:0.5px solid rgba(108,99,255,0.25)">
-      <div class="rep-score-hero-num" style="color:#6C63FF" id="rep-lss">0</div>
-      <div class="rep-score-hero-lbl" style="color:#6C63FF">Thrive Score</div>
-      <div class="rep-score-hero-interp" id="rep-lss-interp"></div>
+    <h2 style="font-size:22px;font-weight:600;margin-bottom:4px">Your Thrive Report</h2>
+    <div class="rep-date" id="rep-date"></div>
+
+    <!-- ══ TIER 1: Always visible ══ -->
+    <div id="rep-tier1">
+
+      <!-- Page navigation -->
+      <div class="rep-page-nav" id="rep-page-nav" style="display:none">
+        <button class="rep-page-btn" id="rep-prev-btn" onclick="repGoPage(0)" disabled>← Back</button>
+        <div class="rep-page-dots">
+          <div class="rep-page-dot active" onclick="repGoPage(0)"></div>
+          <div class="rep-page-dot" onclick="repGoPage(1)"></div>
+        </div>
+        <button class="rep-page-btn" id="rep-next-btn" onclick="repGoPage(1)">Dive deeper →</button>
+      </div>
+
+      <!-- ── PAGE 1: Score graphics ── -->
+      <div class="rep-page active" id="rep-page-0">
+
+        <!-- Thrive Score meter + Balance ring side by side -->
+        <div class="rep-scores-hero">
+          <!-- Thrive Score card with FICO-style meter -->
+          <div class="rep-score-hero-card" style="background:rgba(108,99,255,0.09);border:0.5px solid rgba(108,99,255,0.25)">
+            <div class="rep-score-hero-lbl" style="color:rgba(108,99,255,0.7)">Thrive Score</div>
+            <div class="rep-score-hero-num" style="color:#6C63FF;margin:6px 0 0" id="rep-lss">0</div>
+            <div class="ts-meter-wrap">
+              <svg class="ts-meter-svg" viewBox="0 0 240 90" id="ts-meter-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+              <div class="ts-meter-label" id="ts-meter-label">out of 1000</div>
+            </div>
+            <div class="rep-score-hero-interp" id="rep-lss-interp"></div>
+          </div>
+          <!-- Balance Score card with ring graphic -->
+          <div class="rep-score-hero-card" style="background:rgba(91,200,245,0.07);border:0.5px solid rgba(91,200,245,0.22)">
+            <div class="rep-score-hero-lbl" style="color:rgba(91,200,245,0.6)">Balance Score</div>
+            <div class="rep-score-hero-num" style="color:#5BC8F5;margin:6px 0 0" id="rep-bs">0</div>
+            <div class="bs-ring-wrap">
+              <svg class="bs-ring-svg" viewBox="0 0 140 140" id="bs-ring-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="bs-balance-line">The goal is to thrive in balance — not just in some areas, but across your whole life.</div>
+            <div class="rep-score-hero-interp" id="rep-bs-interp"></div>
+          </div>
+        </div>
+
+        <!-- Momentum Score card with directional graphic -->
+        <div class="rep-ms-card" id="rep-ms-card">
+          <div class="rep-ms-row">
+            <div class="rep-ms-icon-wrap" id="rep-ms-icon"></div>
+            <div class="rep-ms-content">
+              <div class="rep-ms-val" id="rep-ms">--</div>
+              <div class="rep-ms-lbl">Momentum Score</div>
+            </div>
+          </div>
+          <div class="rep-ms-desc" id="rep-ms-sub"></div>
+        </div>
+
+        <!-- Crisis Flag card with flag graphic -->
+        <div id="rep-cf-graphic-card"></div>
+
+        <!-- Crisis flag block (full text — never gated) -->
+        <div id="rep-cf-block"></div>
+
+        <!-- Tier 1 domain preview -->
+        <div id="rep-tier1-preview"></div>
+
+      </div><!-- /page 0 -->
+
+      <!-- ── PAGE 2: Dive into domains ── -->
+      <div class="rep-page" id="rep-page-1">
+        <div class="rep-p2-intro" id="rep-p2-headline"></div>
+        <div class="rep-p2-sub" id="rep-p2-sub"></div>
+        <div id="rep-tier1-extra"></div>
+      </div><!-- /page 1 -->
+
+    </div><!-- /tier1 -->
+
+    <!-- ══ GATE BLOCK ══ -->
+    <div class="rep-gate" id="rep-gate">
+
+      <!-- Gate header graphic -->
+      <div class="rep-gate-graphic" id="rep-gate-graphic"></div>
+
+      <div class="rep-gate-eyebrow">✦ Founding Cohort &nbsp;·&nbsp; A Gift From Us</div>
+      <div class="rep-gate-headline">Your full Thrive Report is ready.</div>
+      <div class="rep-gate-sub">We're in our founding cohort stage. Your complete report — normally <s style="color:rgba(255,255,255,0.25)">$27</s> — is yours free, in exchange for 5 minutes of honest feedback. Your input will directly shape what Thrive becomes.</div>
+
+      <div class="rep-gate-value">
+        <span>🎁</span>
+        <span>Valued at $17 &nbsp;·&nbsp; <strong>Yours free as founding cohort</strong></span>
+      </div>
+
+      <div class="rep-gate-teasers">
+        <div class="rep-gate-teasers-label">Your full report includes</div>
+        <div class="rep-gate-teaser-item">
+          <span class="rep-gate-teaser-icon">🗺</span>
+          <div class="rep-gate-teaser-text">
+            <div class="rep-gate-teaser-name">Domain-by-Domain Coaching Plan</div>
+            <div class="rep-gate-teaser-desc">All 11 areas with satisfaction bars, momentum direction, and a personalised insight for each</div>
+          </div>
+        </div>
+        <div class="rep-gate-teaser-item">
+          <span class="rep-gate-teaser-icon">⚖️</span>
+          <div class="rep-gate-teaser-text">
+            <div class="rep-gate-teaser-name">Balance Score Breakdown</div>
+            <div class="rep-gate-teaser-desc">Where your life is uneven, and which single area would lift everything else</div>
+          </div>
+        </div>
+        <div class="rep-gate-teaser-item">
+          <span class="rep-gate-teaser-icon">🔭</span>
+          <div class="rep-gate-teaser-text">
+            <div class="rep-gate-teaser-name">Next Season Watchlist</div>
+            <div class="rep-gate-teaser-desc">The areas you've been quietly avoiding</div>
+            <div class="rep-gate-teaser-hook" id="gate-watchlist-hook"></div>
+          </div>
+        </div>
+        <div class="rep-gate-teaser-item">
+          <span class="rep-gate-teaser-icon">✦</span>
+          <div class="rep-gate-teaser-text">
+            <div class="rep-gate-teaser-name">Strength Transfer Analysis</div>
+            <div class="rep-gate-teaser-desc">How the energy in your strongest areas can unlock what isn't working yet</div>
+          </div>
+        </div>
+        <div class="rep-gate-teaser-item">
+          <span class="rep-gate-teaser-icon">🎯</span>
+          <div class="rep-gate-teaser-text">
+            <div class="rep-gate-teaser-name">Seasonal Action Prompt</div>
+            <div class="rep-gate-teaser-desc">One concrete first step for each of your Focus Now areas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rep-gate-cta">
+        <div class="rep-gate-cta-label">Enter your email to unlock your full report instantly. We'll follow up with 3 to 4 short questions. That's it.</div>
+        <div class="rep-gate-input-row">
+          <input type="email" class="rep-gate-input" id="gate-email" placeholder="your@email.com"
+            onkeydown="if(event.key==='Enter')unlockReport()">
+          <button class="rep-gate-btn" onclick="unlockReport()">Unlock my report →</button>
+        </div>
+        <div class="rep-gate-privacy">No spam. Your email is used only to send your report and our feedback questions.</div>
+      </div>
+
+      <div class="rep-gate-paid">
+        <button class="rep-gate-paid-link" onclick="unlockReport()">Skip — view summary only</button>
+      </div>
     </div>
-    <div class="rep-score-hero-card" style="background:rgba(91,200,245,0.07);border:0.5px solid rgba(91,200,245,0.22)">
-      <div class="rep-score-hero-num" style="color:#5BC8F5" id="rep-bs">0</div>
-      <div class="rep-score-hero-lbl" style="color:#5BC8F5">Balance Score</div>
-      <div class="rep-score-hero-interp" id="rep-bs-interp"></div>
+
+    <!-- ══ TIER 2: Unlocked after email ══ -->
+    <div id="rep-tier2">
+      <div class="rep-unlock-banner" id="rep-unlock-banner"></div>
+      <div id="rep-strengths-block"></div>
+      <div class="rep-metrics-explainer" id="rep-metrics-explainer"></div>
+      <div class="rep-compare" id="rep-compare"></div>
+      <div id="rep-zone-cards"></div>
+      <div id="rep-watchlist"></div>
+      <div id="rep-insight-block"></div>
+      <div class="rep-scores" style="margin-top:20px">
+        <div class="rep-score-card" style="cursor:pointer;border-color:rgba(108,99,255,0.3);grid-column:1/-1" id="snapshot-card"
+          onclick="saveSnapshotTS();this.innerHTML='<div class=rep-score-val style=color:#2ECC71;font-size:26px>✓</div><div class=rep-score-lbl>Snapshot Saved</div><div class=rep-score-sub>Your Thrive Score is saved. Complete your next seasonal assessment to unlock Momentum tracking.</div>'">
+          <div class="rep-score-val" style="color:#6C63FF;font-size:20px">💾</div>
+          <div class="rep-score-lbl">Save This Season</div>
+          <div class="rep-score-sub">Tap to record your score for next season's Momentum tracking.</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:28px;padding-bottom:40px">
+        <button class="btn-back" onclick="goTo('model')">← View Model</button>
+        <button class="btn-next" onclick="goTo('welcome')">Start Over</button>
+      </div>
     </div>
-  </div>
 
-  <!-- Score cards: MS, CF, Save -->
-  <div class="rep-scores">
-    <div class="rep-score-card">
-      <div class="rep-score-val" id="rep-ms" style="font-size:26px">--</div>
-      <div class="rep-score-lbl">Momentum Score</div>
-      <div class="rep-score-sub" id="rep-ms-sub"></div>
-    </div>
-    <div class="rep-score-card">
-      <div class="rep-score-val" id="rep-cf-val">--</div>
-      <div class="rep-score-lbl">Crisis Flag</div>
-      <div class="rep-score-sub" id="rep-cf-sub"></div>
-    </div>
-    <div class="rep-score-card" style="cursor:pointer;border-color:rgba(108,99,255,0.3);grid-column:1/-1" id="snapshot-card" onclick="saveSnapshotTS();document.getElementById('snapshot-card').innerHTML='<div class=rep-score-val style=color:#2ECC71>✓</div><div class=rep-score-lbl>Snapshot Saved</div><div class=rep-score-sub>Your Thrive Score is saved. Complete your next seasonal assessment to unlock Momentum tracking.</div>'">
-      <div class="rep-score-val" style="color:#6C63FF;font-size:20px">💾</div>
-      <div class="rep-score-lbl">Save This Season</div>
-      <div class="rep-score-sub">Tap to record your score for next season's Momentum tracking.</div>
-    </div>
-  </div>
-
-  <!-- All metrics explained -->
-  <div class="rep-metrics-explainer" id="rep-metrics-explainer"></div>
-
-  <!-- TS vs BS comparison -->
-  <div class="rep-compare" id="rep-compare"></div>
-
-  <!-- Crisis flag (if active) -->
-  <div id="rep-cf-block"></div>
-
-  <!-- What's working -->
-  <div id="rep-strengths-block"></div>
-
-  <!-- Key insight -->
-  <div id="rep-insight-block"></div>
-
-  <!-- Focus zone cards -->
-  <div id="rep-zone-cards"></div>
-
-  <!-- Next Season Watchlist -->
-  <div id="rep-watchlist"></div>
-
-  <div style="display:flex;justify-content:space-between;margin-top:28px;padding-bottom:16px">
-    <button class="btn-back" onclick="goTo('model')">← View Model</button>
-    <button class="btn-next" onclick="goTo('welcome')">Start Over</button>
   </div>
 </div>
 
@@ -1316,6 +1534,20 @@ function zonePrompt(d){
   return null;
 }
 
+// ── PAGE NAVIGATION ──────────────────────────────────
+let currentRepPage = 0;
+function repGoPage(n) {
+  document.querySelectorAll('.rep-page').forEach((p,i)=>{ p.classList.toggle('active', i===n); });
+  document.querySelectorAll('.rep-page-dot').forEach((d,i)=>{ d.classList.toggle('active', i===n); });
+  const prevBtn=document.getElementById('rep-prev-btn');
+  const nextBtn=document.getElementById('rep-next-btn');
+  if(prevBtn) prevBtn.disabled=(n===0);
+  if(nextBtn) nextBtn.disabled=(n===1);
+  currentRepPage=n;
+  const sr=document.getElementById('s-report');
+  if(sr) sr.scrollTo({top:0,behavior:'smooth'});
+}
+
 // ── BUILD REPORT ──────────────────────────────────────
 function buildReport(){
   computeAll();
@@ -1327,255 +1559,435 @@ function buildReport(){
   const sigma=Math.sqrt(scores.reduce((a,s)=>a+Math.pow(s-mean,2),0)/scores.length);
   const tsGap=tsR-bsR;
 
+  // Reset gate and page state
+  const gate=document.getElementById('rep-gate');
+  const tier2=document.getElementById('rep-tier2');
+  if(gate) gate.style.display='';
+  if(tier2) tier2.classList.remove('unlocked');
+  repGoPage(0);
+  const pageNav=document.getElementById('rep-page-nav');
+  if(pageNav) pageNav.style.display='flex';
+
   document.getElementById('rep-date').textContent=
     new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // ── THRIVE SCORE METER (FICO-style arc) ──
   document.getElementById('rep-lss').textContent=tsR;
+  const tsPct=tsR/1000;
+  const cx=120,cy=82,r=62;
+  function arcPt(deg){ const rad=deg*Math.PI/180; return [cx+r*Math.cos(rad), cy+r*Math.sin(rad)]; }
+  const startDeg=200, endDeg=340, span=endDeg-startDeg;
+  const [sx,sy]=arcPt(startDeg), [ex,ey]=arcPt(endDeg);
+  const trackPath=`M${sx.toFixed(1)},${sy.toFixed(1)} A${r},${r},0,0,1,${ex.toFixed(1)},${ey.toFixed(1)}`;
+  const fillEndDeg=startDeg+span*tsPct;
+  const [fx,fy]=arcPt(fillEndDeg);
+  const bigArc=tsPct>0.5?1:0;
+  const fillArc=tsPct>0.01?`M${sx.toFixed(1)},${sy.toFixed(1)} A${r},${r},0,${bigArc},1,${fx.toFixed(1)},${fy.toFixed(1)}`:'';
+  const meterColor=ts<200?'#FF4D4D':ts<400?'#FF7B54':ts<600?'#FFB347':ts<800?'#A8E063':'#2ECC71';
+  const svgEl=document.getElementById('ts-meter-svg');
+  if(svgEl){
+    svgEl.innerHTML=`
+    <defs><linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4D4D"/>
+      <stop offset="35%" stop-color="#FFB347"/>
+      <stop offset="65%" stop-color="#A8E063"/>
+      <stop offset="100%" stop-color="#2ECC71"/>
+    </linearGradient></defs>
+    <path d="${trackPath}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="8" stroke-linecap="round"/>
+    ${fillArc?`<path d="${fillArc}" fill="none" stroke="url(#mg)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+    <circle cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="6" fill="${meterColor}" opacity="0.95"/>
+    <circle cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="3" fill="#fff"/>`:'' }
+    <text x="36" y="82" font-size="7" fill="rgba(255,255,255,0.28)" text-anchor="middle">Low</text>
+    <text x="${cx}" y="24" font-size="7" fill="rgba(255,255,255,0.28)" text-anchor="middle">Mid</text>
+    <text x="204" y="82" font-size="7" fill="rgba(255,255,255,0.28)" text-anchor="middle">High</text>`;
+  }
+  const tsMeterLbl=document.getElementById('ts-meter-label');
+  if(tsMeterLbl) tsMeterLbl.textContent=`${tsR} out of 1000`;
 
-  // TS interpretation — warm, forward-looking language
-  const tsInterp=ts>=800?'You are in a genuinely strong place. The areas that matter most to you are going well. That\'s worth acknowledging before you look at what\'s next.'
-    :ts>=600?'You\'re doing well overall. There\'s real life happening here: some areas thriving, others wanting more attention. That\'s not a problem. That\'s being human.'
-    :ts>=400?'There are meaningful areas of your life asking for attention. This report will help you see which ones, and what to do first. You\'re not behind. You\'re just getting started with clarity.'
-    :'This season is demanding. Several areas you care about aren\'t where you want them to be, and that\'s hard to sit with. The first step is seeing it clearly, which you\'ve just done. That takes courage.';
-  document.getElementById('rep-lss-interp').textContent=tsInterp;
+  const tsInterp=ts>=800?`You are in a genuinely strong place. The areas that matter most to you are going well. That's worth acknowledging before you look at what's next.`
+    :ts>=600?`You're doing well overall. There's real life happening here: some areas thriving, others wanting more attention. That's not a problem. That's being human.`
+    :ts>=400?`There are meaningful areas of your life asking for attention. This report will help you see which ones, and what to do first. You're not behind. You're just getting started with clarity.`
+    :`This season is demanding. Several areas you care about aren't where you want them to be, and that's hard to sit with. The first step is seeing it clearly, which you've just done. That takes courage.`;
+  const lssInterpEl=document.getElementById('rep-lss-interp');
+  if(lssInterpEl) lssInterpEl.textContent=tsInterp;
 
-  // Balance Score — equal hero card
+  // ── BALANCE SCORE RING ──
   document.getElementById('rep-bs').textContent=bsR;
-  const bsInterp=tsGap>120?'Life is uneven right now. Some areas are carrying the weight of others.'
-    :tsGap>60?'A few areas are pulling the average down. Addressing just one or two will shift this quickly.'
-    :'Your satisfaction is fairly even across all areas. That balance is something to protect.';
-  document.getElementById('rep-bs-interp').textContent=bsInterp;
+  const bsInterp=tsGap>120?`Life is uneven right now. Some areas are carrying the weight of others.`
+    :tsGap>60?`A few areas are pulling the average down. Addressing just one or two will shift this quickly.`
+    :`Your satisfaction is fairly even across all areas. That balance is something to protect.`;
+  const bsInterpEl=document.getElementById('rep-bs-interp');
+  if(bsInterpEl) bsInterpEl.textContent=bsInterp;
 
-  // Momentum Score
-  const msEl=document.getElementById('rep-ms');
-  const msSub=document.getElementById('rep-ms-sub');
-  if(ms===null){
-    msEl.textContent='—'; msEl.style.color='rgba(255,255,255,0.3)';
-    msSub.textContent='Save this season\'s snapshot (button above) and complete your next seasonal assessment to unlock your Momentum Score. It will show you the progress you\'ve made — in numbers you can track.';
-  } else {
-    msEl.textContent=(ms>=0?'+':'')+Math.round(ms);
-    msEl.style.color=ms>=0?'#2ECC71':'#FF4D4D';
-    msSub.textContent=ms>=0
-      ?`+${Math.round(ms)} points since last season. That number represents real change in areas that matter to you.`
-      :`${Math.round(ms)} points since last season. This is information, not a verdict. Something needs a different approach, and now you have the data to find it.`;
+  function ringArc(rcx,rcy,rr,pct,col,sw){
+    if(pct<=0) return '';
+    const sa=-Math.PI/2, ea=sa+2*Math.PI*Math.min(pct,0.9999);
+    const x1=rcx+rr*Math.cos(sa), y1=rcy+rr*Math.sin(sa);
+    const x2=rcx+rr*Math.cos(ea), y2=rcy+rr*Math.sin(ea);
+    return `<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${rr},${rr},0,${pct>0.5?1:0},1,${x2.toFixed(1)},${y2.toFixed(1)}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`;
+  }
+  const bsRingEl=document.getElementById('bs-ring-svg');
+  if(bsRingEl){
+    bsRingEl.innerHTML=`
+    <circle cx="70" cy="70" r="52" fill="none" stroke="rgba(108,99,255,0.1)" stroke-width="10"/>
+    <circle cx="70" cy="70" r="36" fill="none" stroke="rgba(91,200,245,0.1)" stroke-width="9"/>
+    ${ringArc(70,70,52,tsR/1000,'#6C63FF',10)}
+    ${ringArc(70,70,36,bsR/1000,'#5BC8F5',9)}
+    <text x="70" y="67" font-size="8" fill="rgba(255,255,255,0.28)" text-anchor="middle">Gap</text>
+    <text x="70" y="80" font-size="11" font-weight="700" fill="rgba(255,255,255,0.65)" text-anchor="middle">${tsGap>0?'+':''}${tsGap}</text>`;
   }
 
-  // Crisis Flag card
-  document.getElementById('rep-cf-val').textContent=cf.length>0?'⚠ Active':'✓ None';
-  document.getElementById('rep-cf-val').style.color=cf.length>0?'#FF4D4D':'#2ECC71';
-  document.getElementById('rep-cf-sub').textContent=cf.length>0
-    ?cf.map(d=>d.name).join(' · '):'No high-priority domain in crisis';
+  // ── MOMENTUM SCORE CARD ──
+  const msIcon=document.getElementById('rep-ms-icon');
+  const msVal=document.getElementById('rep-ms');
+  const msSub=document.getElementById('rep-ms-sub');
+  if(msIcon && msVal && msSub){
+    if(ms===null){
+      msIcon.style.background='rgba(255,255,255,0.05)';
+      msIcon.innerHTML=`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+      msVal.textContent='Pending'; msVal.style.color='rgba(255,255,255,0.3)'; msVal.style.fontSize='18px';
+      msSub.innerHTML='Complete your first seasonal snapshot to unlock this score next season. Save it below.<strong>Every point of progress you make this season will be measured and shown here next time.</strong>';
+    } else {
+      const pos=ms>=0;
+      msIcon.style.background=pos?'rgba(46,204,113,0.15)':'rgba(255,77,77,0.12)';
+      msIcon.innerHTML=`<svg width="26" height="26" viewBox="0 0 26 26" fill="none">${pos?'<path d="M13 20V8M7 14l6-6 6 6" stroke="#2ECC71" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>':'<path d="M13 8v12M7 14l6 6 6-6" stroke="#FF4D4D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'}</svg>`;
+      msVal.textContent=(pos?'+':'')+Math.round(ms); msVal.style.color=pos?'#2ECC71':'#FF4D4D'; msVal.style.fontSize='28px';
+      msSub.innerHTML=pos
+        ?`+${Math.round(ms)} points since last season. That number represents real change in the areas that matter to you.<strong>Progress is proof that where you invest your attention matters.</strong>`
+        :`${Math.round(ms)} points since last season. This is information, not a verdict. Something needs a different approach, and now you have the data to find it.<strong>Every season is a new decision about where to invest.</strong>`;
+    }
+  }
 
-  // ── 1. METRICS EXPLAINER ──────────────────────────
+  // ── CRISIS FLAG GRAPHIC CARD ──
+  const cfCardEl=document.getElementById('rep-cf-graphic-card');
+  if(cfCardEl){
+    if(cf.length>0){
+      const cfNames=cf.map(d=>`<span class="rep-cf-domain-tag">${d.emoji} ${d.name}</span>`).join('');
+      cfCardEl.innerHTML=`<div class="rep-cf-card cf-active">
+        <div class="rep-cf-flag-row">
+          <svg class="rep-cf-flag-svg" width="44" height="52" viewBox="0 0 44 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="2" width="3" height="48" rx="1.5" fill="rgba(255,77,77,0.4)"/>
+            <path d="M11 4 L38 14 L11 24 Z" fill="#FF4D4D" opacity="0.9"/>
+            <circle cx="9.5" cy="2" r="3" fill="#FF4D4D"/>
+            <circle cx="9.5" cy="2" r="3" fill="#FF4D4D" opacity="0.4"><animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/></circle>
+          </svg>
+          <div class="rep-cf-flag-content">
+            <div class="rep-cf-flag-title" style="color:#FF4D4D">Crisis Flag Active</div>
+            <div class="rep-cf-flag-sub">One or more areas you care deeply about are at critically low satisfaction.</div>
+          </div>
+        </div>
+        <div class="rep-cf-domains">${cfNames}</div>
+      </div>`;
+    } else {
+      cfCardEl.innerHTML=`<div class="rep-cf-card cf-none">
+        <div class="rep-cf-flag-row">
+          <svg class="rep-cf-flag-svg" width="44" height="52" viewBox="0 0 44 52" fill="none">
+            <rect x="8" y="2" width="3" height="48" rx="1.5" fill="rgba(46,204,113,0.3)"/>
+            <path d="M11 4 L38 14 L11 24 Z" fill="#2ECC71" opacity="0.75"/>
+            <circle cx="9.5" cy="2" r="3" fill="#2ECC71"/>
+          </svg>
+          <div class="rep-cf-flag-content">
+            <div class="rep-cf-flag-title" style="color:#2ECC71">No Crisis Flag</div>
+            <div class="rep-cf-flag-sub">None of your high-priority domains are in critical territory. That's a meaningful sign of stability.</div>
+          </div>
+        </div>
+      </div>`;
+    }
+  }
+
+  // Crisis flag full text block
+  const cfBlock=document.getElementById('rep-cf-block');
+  if(cfBlock){
+    cfBlock.innerHTML='';
+    if(cf.length>0){
+      const cfNames2=cf.map(d=>d.name).join(' and ');
+      cfBlock.innerHTML=`<div class="rep-crisis" style="margin-top:10px">
+        <div class="rep-crisis-header"><span class="rep-crisis-icon">⚠</span><span class="rep-crisis-title">Crisis Flag: ${cfNames2}</span></div>
+        <div class="rep-crisis-body"><strong>${cfNames2}</strong>, ${cf.length===1?'an area':'areas'} you've placed among your highest priorities, ${cf.length===1?'is':'are'} at critically low satisfaction right now.</div>
+        <div class="rep-crisis-action">Acknowledging it takes courage. The next step is one small action — not a plan, just one thing in the direction of change.</div>
+      </div>`;
+    }
+  }
+
+  // ── GATE GRAPHIC ──
+  buildGateGraphic(tsR, bsR, sorted);
+
+  // ── TIER 1 PREVIEW (pages 1 and 2) ──
+  buildTier1Preview(sorted, tsR, bsR, ms);
+
+  // ── TIER 2: STRENGTHS ──
   const redDoms=sorted.filter(d=>fpZone(d)==='red');
   const amberDoms=sorted.filter(d=>fpZone(d)==='amber');
   const greenDoms=sorted.filter(d=>fpZone(d)==='green');
   const grayDoms=sorted.filter(d=>fpZone(d)==='gray');
+  const strengthsEl=document.getElementById('rep-strengths-block');
+  const topGreen=greenDoms.slice(0,3);
+  if(strengthsEl){
+    if(topGreen.length>0){
+      const stTransfer=topGreen.length>1
+        ?`The qualities that make ${topGreen[0].name} strong are transferable. What would it look like to bring even 10% of that energy to your Focus Now areas?`
+        :`The same qualities that make ${topGreen[0].name} work for you are available everywhere in your life.`;
+      strengthsEl.innerHTML=`<div class="rep-strengths">
+        <h3>✦ What's Working: Your Strengths This Season</h3>
+        <div class="rep-strengths-body">These areas are genuinely thriving, and that didn't happen by accident.</div>
+        <div class="rep-strengths-domains">${topGreen.map(d=>`<span class="rep-strength-tag">${d.emoji} ${d.name}</span>`).join('')}</div>
+        <div class="rep-strengths-transfer">${stTransfer}</div>
+      </div>`;
+    } else strengthsEl.innerHTML='';
+  }
 
+  // ── TIER 2: METRICS EXPLAINER ──
   const metrics=[
-    {abbr:'TS', label:'Thrive Score', col:'#6C63FF', bg:'rgba(108,99,255,0.15)',
-      desc:`Your values-weighted life satisfaction score, scaled 0–1000. It reflects not just how satisfied you are, but how satisfied you are in the areas that matter most to <em>you</em>. Two people with identical scores can have completely different lives, because their values are different.`},
-    {abbr:'BS', label:'Balance Score', col:'#5BC8F5', bg:'rgba(91,200,245,0.12)',
-      desc:`How evenly distributed your satisfaction is. A high Thrive Score can hide imbalance. You might be thriving in 4 areas and struggling in 6. The Balance Score penalises that gap. The closer TS and BS are, the more your life satisfaction is spread across all areas rather than concentrated in a few.`},
-    {abbr:'U', label:'Urgency', col:'#FFB347', bg:'rgba(255,179,71,0.12)',
-      desc:`How much each domain needs your attention, calculated from: how much you value it × how big the gap between where it is and where you want it × whether it's getting worse. A high-urgency domain is one you care about that isn't going well.`},
-    {abbr:'FP', label:'Focus Priority', col:'#FF4D4D', bg:'rgba(255,77,77,0.12)',
-      desc:`Urgency filtered through your real-world readiness. A domain can be urgent but not in focus, because you're not ready, or your bandwidth is genuinely committed elsewhere. It answers: "of everything that needs attention, what should I actually act on this season?"`},
-    {abbr:'CF', label:'Crisis Flag', col:'#FF4D4D', bg:'rgba(255,77,77,0.12)',
-      desc:`Fires when a domain that matters deeply to you (one of your top priorities) has critically low satisfaction. It appears separately from your overall score because an average can hide a crisis. You deserve to see it clearly, not buried in a number.`},
-    {abbr:'LPS', label:'Latent Priority', col:'#FFB347', bg:'rgba(255,179,71,0.1)',
-      desc:`The urgency score of domains you've chosen to defer this season. They don't disappear just because you said no. The Next Season Watchlist keeps them visible, so when your capacity opens up, you know exactly where to turn next.`},
-    {abbr:'MS', label:'Momentum Score', col:'#2ECC71', bg:'rgba(46,204,113,0.1)',
-      desc:ms===null
-        ?`Available from your second seasonal assessment onward. When you save today's snapshot and return next season, you'll see how many points your Thrive Score has moved. That number is proof that where you invest your attention matters.`
-        :`The change in your Thrive Score since last season. It reflects the cumulative effect of everything you focused on — the habits you built, the conversations you had, the areas you invested in. Every point is a decision made real.`},
+    {abbr:'TS', label:'Thrive Score', col:'#6C63FF', bg:'rgba(108,99,255,0.15)', desc:`Your values-weighted life satisfaction score, scaled 0 to 1000. Two people with identical scores can have completely different lives, because their values are different.`},
+    {abbr:'BS', label:'Balance Score', col:'#5BC8F5', bg:'rgba(91,200,245,0.12)', desc:`How evenly distributed your satisfaction is. A high Thrive Score can hide imbalance. The closer TS and BS are, the more your life satisfaction is spread across all areas.`},
+    {abbr:'U',  label:'Urgency',       col:'#FFB347', bg:'rgba(255,179,71,0.12)', desc:`How much each domain needs your attention: how much you value it, how big the satisfaction gap is, and whether it's getting worse.`},
+    {abbr:'FP', label:'Focus Priority',col:'#FF4D4D', bg:'rgba(255,77,77,0.12)',  desc:`Urgency filtered through your real-world readiness. Of everything that needs attention, what should you actually act on this season?`},
+    {abbr:'CF', label:'Crisis Flag',   col:'#FF4D4D', bg:'rgba(255,77,77,0.12)',  desc:`Fires when a domain you deeply value has critically low satisfaction. You deserve to see it clearly, not buried in an average.`},
+    {abbr:'LPS',label:'Latent Priority',col:'#FFB347',bg:'rgba(255,179,71,0.1)', desc:`Urgency score of domains you've deferred. They stay visible in your Watchlist so when your capacity opens up, you know where to turn next.`},
+    {abbr:'MS', label:'Momentum Score',col:'#2ECC71', bg:'rgba(46,204,113,0.1)', desc:ms===null?`Available from your second seasonal assessment onward. Save today's snapshot and return next season to see how many points you've moved.`:`The change in your Thrive Score since last season. Every point is a decision made real.`},
   ];
+  const meEl=document.getElementById('rep-metrics-explainer');
+  if(meEl) meEl.innerHTML=`<h3>What these numbers mean, in plain language</h3>${metrics.map(m=>`<div class="rep-metric-row"><div class="rep-metric-badge" style="background:${m.bg};color:${m.col}">${m.abbr}</div><div class="rep-metric-text"><div class="rep-metric-name">${m.label}</div><div class="rep-metric-explain">${m.desc}</div></div></div>`).join('')}`;
 
-  document.getElementById('rep-metrics-explainer').innerHTML=`
-    <h3>What these numbers mean, in plain language</h3>
-    ${metrics.map(m=>`
-      <div class="rep-metric-row">
-        <div class="rep-metric-badge" style="background:${m.bg};color:${m.col}">${m.abbr}</div>
-        <div class="rep-metric-text">
-          <div class="rep-metric-name">${m.label}</div>
-          <div class="rep-metric-explain">${m.desc}</div>
-        </div>
-      </div>`).join('')}`;
-
-  // ── 2. TS VS BS COMPARISON ─────────────────────────
+  // ── TIER 2: TS VS BS COMPARISON ──
   let compareBody='', compareTip='';
   if(tsGap<20){
-    compareBody=`Your Thrive Score (${tsR}) and Balance Score (${bsR}) are very close. This means your satisfaction is fairly evenly distributed across the different areas of your life. What you gain in one area isn't coming at the expense of neglecting another.`;
-    compareTip=`When these two numbers are close, life tends to feel more sustainable and grounded, even when the absolute scores aren't perfect yet.`;
+    compareBody=`Your Thrive Score (${tsR}) and Balance Score (${bsR}) are very close. Your satisfaction is fairly evenly distributed.`;
+    compareTip=`When these two numbers are close, life tends to feel more sustainable and grounded.`;
   } else if(tsGap<80){
-    compareBody=`Your Thrive Score is ${tsR} and your Balance Score is ${bsR}, a gap of ${tsGap} points. This suggests that while some areas of your life are going well, others are pulling behind. Your overall satisfaction is propped up by the areas that are working, which can sometimes mask how much the lower areas are costing you in energy and quiet stress.`;
-    compareTip=`To bring these scores closer, you don't need to fix everything at once. Meaningfully improving just 1–2 lower-scoring domains in your Focus Now zone will raise both scores simultaneously.`;
+    compareBody=`Your Thrive Score is ${tsR} and your Balance Score is ${bsR}, a gap of ${tsGap} points. Some areas are going well while others are pulling behind.`;
+    compareTip=`Meaningfully improving just 1 to 2 lower-scoring domains in your Focus Now zone will raise both scores simultaneously.`;
   } else {
-    compareBody=`There is a gap of ${tsGap} points between your Thrive Score (${tsR}) and Balance Score (${bsR}). This tells an important story: your satisfaction is concentrated in a few areas while others are significantly behind. You may be thriving in your career but struggling in relationships, or vice versa. High-scoring areas can create a sense of "I'm doing okay overall" — but the lower areas are still quietly costing you energy, clarity, and peace.`;
-    compareTip=`The path toward closing this gap is in your Focus Now domains. Investing there won't just help those specific areas. It will make your whole life feel more integrated.`;
+    compareBody=`There is a gap of ${tsGap} points between your Thrive Score (${tsR}) and Balance Score (${bsR}). Your satisfaction is concentrated in a few areas while others are significantly behind.`;
+    compareTip=`The path toward closing this gap is in your Focus Now domains. Investing there will make your whole life feel more integrated.`;
   }
-  document.getElementById('rep-compare').innerHTML=`
-    <h3>Understanding your two scores: Thrive Score vs Balance Score</h3>
+  const cmpEl=document.getElementById('rep-compare');
+  if(cmpEl) cmpEl.innerHTML=`<h3>Understanding your two scores: Thrive Score vs Balance Score</h3>
     <div class="rep-compare-nums">
-      <div class="rep-compare-num">
-        <div class="rep-compare-val" style="color:#6C63FF">${tsR}</div>
-        <div class="rep-compare-lbl">Thrive Score</div>
-      </div>
-      <div class="rep-compare-arrow">↔</div>
-      <div class="rep-compare-num">
-        <div class="rep-compare-val" style="color:#5BC8F5">${bsR}</div>
-        <div class="rep-compare-lbl">Balance Score</div>
-      </div>
+      <div class="rep-compare-num"><div class="rep-compare-val" style="color:#6C63FF">${tsR}</div><div class="rep-compare-lbl">Thrive Score</div></div>
+      <div class="rep-compare-arrow">\u2194</div>
+      <div class="rep-compare-num"><div class="rep-compare-val" style="color:#5BC8F5">${bsR}</div><div class="rep-compare-lbl">Balance Score</div></div>
       <div class="rep-compare-arrow" style="color:rgba(255,255,255,0.15);font-size:13px">gap: ${tsGap}</div>
     </div>
     <div class="rep-compare-body">${compareBody}</div>
     <div class="rep-compare-tip">${compareTip}</div>`;
 
-  // ── 3. CRISIS FLAG ────────────────────────────────
-  const cfBlock=document.getElementById('rep-cf-block');
-  if(cf.length>0){
-    const cfNames=cf.map(d=>`<strong>${d.emoji} ${d.name}</strong>`).join(' and ');
-    cfBlock.innerHTML=`
-      <div class="rep-crisis">
-        <div class="rep-crisis-header">
-          <div class="rep-crisis-icon">⚠</div>
-          <div class="rep-crisis-title">Crisis Flag: ${cf.map(d=>d.name).join(' & ')}</div>
-        </div>
-        <div class="rep-crisis-body">
-          <p>${cfNames}, ${cf.length===1?'an area':'areas'} you've placed among your highest priorities, ${cf.length===1?'is':'are'} at critically low satisfaction right now.</p>
-          <br>
-          <p>We want to say something important before you go further into this report: <strong>life has seasons.</strong> Every person reading these results has been through difficult times before, and come through them. This is one of those times for you in ${cf.map(d=>d.name).join(' and ')}. The fact that you're here, taking an honest look, already matters.</p>
-          <br>
-          <p>What makes a difficult season easier to move through is not pretending it isn't happening. It's <strong>acknowledging it,</strong> which you've done. It's <strong>taking responsibility</strong> for what you can control, starting with where your attention goes next. And it's <strong>taking action</strong>, however small, in the direction of change.</p>
-        </div>
-        <div class="rep-crisis-action">
-          You don't have to fix everything. You just have to begin. Thrive is designed to help you find the right first step, and to measure whether it's working. You're not in this alone.
-        </div>
-      </div>`;
-  } else {
-    cfBlock.innerHTML='';
-  }
-
-  // ── 4. WHAT'S WORKING ─────────────────────────────
-  const strengthsEl=document.getElementById('rep-strengths-block');
-  if(greenDoms.length>0){
-    const improvingGreen=greenDoms.filter(d=>d.D===1);
-    const tagsHtml=greenDoms.map(d=>`<span class="rep-strength-tag">${d.emoji} ${d.name}</span>`).join('');
-    const transferDomain=redDoms.length>0?redDoms[0]:amberDoms.length>0?amberDoms[0]:null;
-    strengthsEl.innerHTML=`
-      <div class="rep-strengths">
-        <h3>✦ What's Working: Your Strengths This Season</h3>
-        <div class="rep-strengths-domains">${tagsHtml}</div>
-        <div class="rep-strengths-body">
-          These areas are genuinely thriving, and that didn't happen by accident.
-          <br><br>
-          Thriving in any area of life requires <strong>investment</strong>. Time, attention, energy, and care — the same limited resources that compete for everything else in your life. The fact that ${greenDoms.length===1?'this area is':'these areas are'} flourishing is evidence of choices you've made, habits you've built, and relationships or practices you've nurtured. <strong>That is your capability showing up.</strong>
-          ${improvingGreen.length>0?`<br><br>${improvingGreen.map(d=>d.name).join(' and ')} ${improvingGreen.length===1?'is':'are'} not only thriving but still improving. That kind of momentum doesn't come from luck — it comes from sustained investment.`:''}
-        </div>
-        ${transferDomain?`<div class="rep-strengths-transfer">
-          The same capacity that built ${greenDoms[0].name} exists in you for ${transferDomain.name} too. Different domain — same person. The skills of attention, consistency, and care transfer.
-        </div>`:''}
-      </div>`;
-  } else {
-    strengthsEl.innerHTML='';
-  }
-
-  // ── 5. KEY INSIGHT ────────────────────────────────
-  const insightEl=document.getElementById('rep-insight-block');
-  const declRed=redDoms.filter(d=>d.D===-1);
-  let insightTxt='';
-  if(redDoms.length===0 && amberDoms.length===0){
-    insightTxt='You haven\'t committed readiness to any domain this season. That\'s okay — life has seasons of consolidation too. When you\'re ready to direct energy somewhere, revisit your Readiness choices. Even one committed domain creates forward motion.';
-  } else if(redDoms.length===0){
-    insightTxt=`Your highest-priority considerations this season are ${amberDoms.slice(0,2).map(d=>d.emoji+' '+d.name).join(' and ')}. These aren't in crisis, but they're meaningful enough to keep in view. Small, consistent attention here will compound over time.`;
-  } else {
-    insightTxt=`Your clearest opportunity this season is ${redDoms[0].emoji} ${redDoms[0].name}${redDoms.length>1?' and '+redDoms[1].emoji+' '+redDoms[1].name:''} — ${redDoms.length===1?'an area':'areas'} where your values, your current satisfaction gap, and your readiness all point in the same direction: here, now.`;
-    if(declRed.length>0) insightTxt+=` Important: ${declRed.map(d=>d.name).join(' and ')} ${declRed.length===1?'is':'are'} actively declining — meaning waiting will cost more than starting.`;
-  }
-  insightEl.innerHTML=`
-    <div style="background:rgba(255,255,255,0.025);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 18px;margin-bottom:20px">
-      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.28);margin-bottom:8px">Your Focus This Season</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.68);line-height:1.75">${insightTxt}</div>
-    </div>`;
-
-  // ── 6. FOCUS ZONE CARDS ───────────────────────────
-  const zoneEl=document.getElementById('rep-zone-cards');
+  // ── TIER 2: FULL ZONE CARDS ──
   const zoneGroups=[
-    {z:'red',   label:'Focus Now',   col:'#FF4D4D', bg:'rgba(255,77,77,0.06)',   bdr:'rgba(255,77,77,0.2)',   doms:redDoms},
-    {z:'amber', label:'Consider',    col:'#FFB347', bg:'rgba(255,179,71,0.05)',  bdr:'rgba(255,179,71,0.18)', doms:amberDoms},
-    {z:'green', label:'Thriving',    col:'#2ECC71', bg:'rgba(46,204,113,0.05)', bdr:'rgba(46,204,113,0.18)', doms:greenDoms},
-    {z:'gray',  label:'Focus Later', col:'#5A6478', bg:'rgba(90,100,120,0.04)', bdr:'rgba(90,100,120,0.15)', doms:grayDoms},
+    {z:'red',   col:'#FF4D4D', bg:'rgba(255,77,77,0.06)',   bdr:'rgba(255,77,77,0.2)',   label:'Focus Now',   doms:redDoms},
+    {z:'amber', col:'#FFB347', bg:'rgba(255,179,71,0.06)',  bdr:'rgba(255,179,71,0.18)', label:'Consider',    doms:amberDoms},
+    {z:'green', col:'#2ECC71', bg:'rgba(46,204,113,0.05)',  bdr:'rgba(46,204,113,0.18)', label:'Thriving',    doms:greenDoms},
+    {z:'gray',  col:'#5A6478', bg:'rgba(90,100,120,0.05)',  bdr:'rgba(90,100,120,0.15)', label:'Focus Later', doms:grayDoms},
   ];
+  const zoneEl=document.getElementById('rep-zone-cards');
+  if(zoneEl) zoneEl.innerHTML=zoneGroups.filter(g=>g.doms.length>0).map(g=>`<div class="rep-zone-section">${g.doms.map(d=>{
+    const dir=d.D===1?'\u2191':d.D===-1?'\u2193':'\u2192';
+    const dc=dColor(d.D); const why=zoneWhy(d); const prompt=zonePrompt(d);
+    const sBar=Math.round(d.S/10*100), vBar=Math.round(d.Vw/10*100);
+    const tags=[`${dLabel(d.D)} ${dir}`,rLabel(d.R),d.D===-1?'Declining, act sooner':''].filter(Boolean);
+    return `<div class="rep-zone-card" style="background:${g.bg};border-color:${g.bdr}">
+      <div class="rep-zone-card-head"><span class="rep-zone-emoji">${d.emoji}</span><span class="rep-zone-name">${d.name}</span><span class="rep-zone-badge fp-badge z-${g.z}">${g.label}</span><span class="rep-zone-dir" style="color:${dc}">${dir}</span></div>
+      <div class="rep-zone-bars">
+        <div class="rep-zone-bar-row"><span class="rep-zone-bar-lbl">Satisfaction</span><div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${sBar}%;background:${g.col}"></div></div><span class="rep-zone-bar-val">${d.S}/10</span></div>
+        <div class="rep-zone-bar-row"><span class="rep-zone-bar-lbl">Importance</span><div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${vBar}%;background:rgba(108,99,255,0.7)"></div></div><span class="rep-zone-bar-val">${d.Vw.toFixed(1)}</span></div>
+      </div>
+      <div class="rep-zone-tags">${tags.map(t=>`<span class="rep-zone-tag">${t}</span>`).join('')}</div>
+      <div class="rep-zone-why" style="color:rgba(255,255,255,${g.z==='red'?'0.65':'0.50'})">${why}</div>
+      ${prompt?`<div class="rep-zone-action" style="color:${g.col}">\u2192 ${prompt}</div>`:''}
+    </div>`;
+  }).join('')}</div>`).join('');
 
-  zoneEl.innerHTML=zoneGroups.filter(g=>g.doms.length>0).map(g=>`
-    <div class="rep-zone-section">
-      ${g.doms.map(d=>{
-        const dir=d.D===1?'↑':d.D===-1?'↓':'→';
-        const dc=dColor(d.D);
-        const why=zoneWhy(d);
-        const prompt=zonePrompt(d);
-        const sBar=Math.round(d.S/10*100);
-        const vBar=Math.round(d.Vw/10*100);
-        const tags=[
-          `${dLabel(d.D)} ${dir}`,
-          rLabel(d.R),
-          d.D===-1?'Declining, act sooner':'',
-        ].filter(Boolean);
-        return `
-          <div class="rep-zone-card" style="background:${g.bg};border-color:${g.bdr}">
-            <div class="rep-zone-card-head">
-              <span class="rep-zone-emoji">${d.emoji}</span>
-              <span class="rep-zone-name" style="color:rgba(255,255,255,0.88)">${d.name}</span>
-              <span class="rep-zone-badge fp-badge z-${g.z}">${g.label}</span>
-              <span class="rep-zone-dir" style="color:${dc}">${dir}</span>
-            </div>
-            <div class="rep-zone-bars">
-              <div class="rep-zone-bar-row">
-                <span class="rep-zone-bar-lbl">Satisfaction</span>
-                <div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${sBar}%;background:${g.col}"></div></div>
-                <span class="rep-zone-bar-val">${d.S}/10</span>
-              </div>
-              <div class="rep-zone-bar-row">
-                <span class="rep-zone-bar-lbl">Importance</span>
-                <div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${vBar}%;background:rgba(108,99,255,0.7)"></div></div>
-                <span class="rep-zone-bar-val">${d.Vw.toFixed(1)}</span>
-              </div>
-            </div>
-            <div class="rep-zone-tags">${tags.map(t=>`<span class="rep-zone-tag">${t}</span>`).join('')}</div>
-            <div class="rep-zone-why" style="color:rgba(255,255,255,${g.z==='red'?'0.65':'0.50'})">${why}</div>
-            ${prompt?`<div class="rep-zone-action" style="color:${g.col}">→ ${prompt}</div>`:''}
-          </div>`;
-      }).join('')}
-    </div>`).join('');
-
-  // ── 7. NEXT SEASON WATCHLIST ──────────────────────
+  // ── TIER 2: WATCHLIST ──
   const watchlist=computeWatchlist();
   const wlEl=document.getElementById('rep-watchlist');
-  if(watchlist.length===0){ wlEl.innerHTML=''; return; }
-
-  wlEl.innerHTML=`
-    <div class="rep-watchlist-block">
-      <h3>🔭 On Your Horizon: Next Season Watchlist</h3>
-      <p class="rep-watchlist-intro">
-        You've chosen not to focus on these areas this season — and that's a valid, intentional decision. But their urgency is real, even if the timing isn't right yet.
-        This list keeps them in view so they don't quietly grow into crises while your attention is elsewhere.
-        When your capacity opens up, you'll know exactly where to look next.
-      </p>
-      ${watchlist.map(d=>`
-        <div class="rep-watch-item">
-          <div class="rep-watch-emoji">${d.emoji}</div>
-          <div class="rep-watch-body">
-            <div class="rep-watch-name">${d.name} ${d.D===-1?'<span style="color:#FF4D4D;font-size:10px">↓ Declining</span>':''}</div>
-            <div class="rep-watch-desc">
-              Satisfaction: ${d.S}/10 · Importance: ${d.Vw.toFixed(1)}/10 · ${d.R===0?'Consciously set aside this season':'Bandwidth committed elsewhere right now'}
-            </div>
-            <div class="rep-watch-q">What would need to change for this area to become active next season?</div>
-          </div>
-          <div class="rep-watch-badge">${d.R===0?'Deferred':'Paused'}</div>
-        </div>`).join('')}
-    </div>`
+  const hookEl=document.getElementById('gate-watchlist-hook');
+  if(hookEl && watchlist.length>0) hookEl.textContent=`Yours includes: ${watchlist.map(d=>d.emoji+' '+d.name).join(', ')}`;
+  if(wlEl){
+    if(watchlist.length===0){ wlEl.innerHTML=''; }
+    else wlEl.innerHTML=`<div class="rep-watchlist-block">
+      <h3>\uD83D\uDD2D On Your Horizon: Next Season Watchlist</h3>
+      <p class="rep-watchlist-intro">You've chosen not to focus on these areas this season. Their urgency is real, even if the timing isn't right yet.</p>
+      ${watchlist.map(d=>`<div class="rep-watch-item">
+        <div class="rep-watch-emoji">${d.emoji}</div>
+        <div class="rep-watch-body">
+          <div class="rep-watch-name">${d.name}${d.D===-1?' <span style="color:#FF4D4D;font-size:10px">\u2193 Declining</span>':''}</div>
+          <div class="rep-watch-desc">Satisfaction: ${d.S}/10 · Importance: ${d.Vw.toFixed(1)}/10 · ${d.R===0?'Consciously set aside this season':'Bandwidth committed elsewhere right now'}</div>
+          <div class="rep-watch-q">What would need to change for this area to become active next season?</div>
+        </div>
+        <div class="rep-watch-badge">${d.R===0?'Deferred':'Paused'}</div>
+      </div>`).join('')}
+    </div>`;
+  }
 }
 
-// ── RESIZE ───────────────────────────────────────────
+// ── BUILD GATE GRAPHIC ────────────────────────────────
+function buildGateGraphic(tsR, bsR, sorted) {
+  const el=document.getElementById('rep-gate-graphic');
+  if(!el) return;
+  const topDoms=sorted.slice(0,6);
+  const dots=topDoms.map((d,i)=>{
+    const angle=(i/topDoms.length)*Math.PI*2-Math.PI/2;
+    const rr=28+d.S*2.2;
+    return {x:280+rr*Math.cos(angle), y:60+rr*Math.sin(angle), col:fpColor(d), d, r:5+d.Vw*0.5};
+  });
+  const lines=topDoms.map((_,i)=>{const a=dots[i],b=dots[(i+1)%dots.length]; return `<line x1="${a.x.toFixed(0)}" y1="${a.y.toFixed(0)}" x2="${b.x.toFixed(0)}" y2="${b.y.toFixed(0)}" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>`;}).join('');
+  const circles=dots.map(d=>`<circle cx="${d.x.toFixed(0)}" cy="${d.y.toFixed(0)}" r="${d.r.toFixed(1)}" fill="${d.col}" opacity="0.18"/><circle cx="${d.x.toFixed(0)}" cy="${d.y.toFixed(0)}" r="${(d.r*0.55).toFixed(1)}" fill="${d.col}" opacity="0.55"/><text x="${d.x.toFixed(0)}" y="${(d.y+3).toFixed(0)}" font-size="9" fill="rgba(255,255,255,0.55)" text-anchor="middle">${d.d.emoji}</text>`).join('');
+  el.innerHTML=`<svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;border-radius:12px">
+    <rect width="560" height="120" rx="12" fill="rgba(108,99,255,0.04)"/>
+    <defs><radialGradient id="gg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(108,99,255,0.12)"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></radialGradient></defs>
+    <ellipse cx="280" cy="60" rx="200" ry="55" fill="url(#gg)"/>
+    ${lines}${circles}
+    <rect x="16" y="16" width="96" height="40" rx="8" fill="rgba(108,99,255,0.18)" stroke="rgba(108,99,255,0.4)" stroke-width="0.5"/>
+    <text x="64" y="33" font-size="18" font-weight="700" fill="#6C63FF" text-anchor="middle">${tsR}</text>
+    <text x="64" y="47" font-size="7" fill="rgba(255,255,255,0.35)" text-anchor="middle" letter-spacing="1">THRIVE SCORE</text>
+    <rect x="448" y="16" width="96" height="40" rx="8" fill="rgba(91,200,245,0.12)" stroke="rgba(91,200,245,0.3)" stroke-width="0.5"/>
+    <text x="496" y="33" font-size="18" font-weight="700" fill="#5BC8F5" text-anchor="middle">${bsR}</text>
+    <text x="496" y="47" font-size="7" fill="rgba(255,255,255,0.35)" text-anchor="middle" letter-spacing="1">BALANCE SCORE</text>
+    <text x="280" y="108" font-size="10" fill="rgba(255,255,255,0.15)" text-anchor="middle">\uD83D\uDD12 Full report locked</text>
+  </svg>`;
+}
+
+// ── TIER 1 PREVIEW ────────────────────────────────────
+function buildTier1Preview(sorted, tsR, bsR, ms) {
+  if(!sorted) sorted = sortedDomains();
+  const redDoms   = sorted.filter(d=>fpZone(d)==='red');
+  const amberDoms = sorted.filter(d=>fpZone(d)==='amber');
+  const greenDoms = sorted.filter(d=>fpZone(d)==='green');
+  const grayDoms  = sorted.filter(d=>fpZone(d)==='gray');
+
+  // Page 1: top Focus Now + blurred second
+  const topDomain    = sorted[0];
+  const secondDomain = sorted[1];
+  const remaining    = sorted.length - 2;
+  const container    = document.getElementById('rep-tier1-preview');
+
+  // Page 2: top amber (Consider) + top gray (Focus Later)
+  const amberPick = amberDoms[0] || null;
+  const grayPick  = grayDoms[0]  || null;
+  const p2Headline = document.getElementById('rep-p2-headline');
+  const p2Sub      = document.getElementById('rep-p2-sub');
+  const p2Container= document.getElementById('rep-tier1-extra');
+
+  function domainCardHTML(d, blurred=false) {
+    const z = fpZone(d);
+    const zoneData = {
+      red:   {col:'#FF4D4D', bg:'rgba(255,77,77,0.06)',   bdr:'rgba(255,77,77,0.2)',   label:'Focus Now'},
+      amber: {col:'#FFB347', bg:'rgba(255,179,71,0.06)',  bdr:'rgba(255,179,71,0.18)', label:'Consider'},
+      green: {col:'#2ECC71', bg:'rgba(46,204,113,0.05)',  bdr:'rgba(46,204,113,0.18)', label:'Thriving'},
+      gray:  {col:'#5A6478', bg:'rgba(90,100,120,0.05)',  bdr:'rgba(90,100,120,0.15)', label:'Focus Later'},
+    };
+    const g = zoneData[z];
+    const dir = d.D===1?'↑':d.D===-1?'↓':'→';
+    const dc = dColor(d.D);
+    const sBar = Math.round(d.S/10*100);
+    const vBar = Math.round(d.Vw/10*100);
+    const why = zoneWhy(d);
+    const prompt = zonePrompt(d);
+    const inner = `
+      <div class="rep-zone-card" style="background:${g.bg};border-color:${g.bdr};margin-bottom:0">
+        <div class="rep-zone-card-head">
+          <span class="rep-zone-emoji">${d.emoji}</span>
+          <span class="rep-zone-name">${d.name}</span>
+          <span class="rep-zone-badge fp-badge z-${z}">${g.label}</span>
+          <span class="rep-zone-dir" style="color:${dc}">${dir}</span>
+        </div>
+        <div class="rep-zone-bars">
+          <div class="rep-zone-bar-row"><span class="rep-zone-bar-lbl">Satisfaction</span><div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${sBar}%;background:${g.col}"></div></div><span class="rep-zone-bar-val">${d.S}/10</span></div>
+          <div class="rep-zone-bar-row"><span class="rep-zone-bar-lbl">Importance</span><div class="rep-zone-bar-track"><div class="rep-zone-bar-fill" style="width:${vBar}%;background:rgba(108,99,255,0.7)"></div></div><span class="rep-zone-bar-val">${d.Vw.toFixed(1)}</span></div>
+        </div>
+        <div class="rep-zone-why" style="color:rgba(255,255,255,0.6)">${why}</div>
+        ${prompt?`<div class="rep-zone-action" style="color:${g.col}">→ ${prompt}</div>`:''}
+      </div>`;
+    if (!blurred) return inner;
+    return `<div class="rep-teaser-card"><div class="rep-teaser-card-inner">${inner}</div><div class="rep-teaser-overlay"><div class="rep-teaser-lock">🔒 Unlock to see ${d.name}</div></div></div>`;
+  }
+
+  // ── PAGE 1 PREVIEW ──
+  if(container) {
+    container.innerHTML = `
+      <div style="margin:8px 0 6px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.22)">Your top focus area</div>
+      ${topDomain ? domainCardHTML(topDomain, false) : ''}
+      <div style="margin-top:8px"></div>
+      ${secondDomain ? domainCardHTML(secondDomain, true) : ''}
+      ${remaining > 0 ? `<div class="rep-more-pill">+ <strong>${remaining} more domain${remaining>1?'s':''}</strong> in your full report</div>` : ''}
+    `;
+  }
+
+  // ── PAGE 2: Let's dive in together ──
+  if(p2Headline) p2Headline.textContent = "Let's dive into a few more domains together.";
+  if(p2Sub) p2Sub.textContent = "We're showing you two more areas to demonstrate how Thrive reads your values, your readiness, and helps you allocate your attention strategically. These aren't random — they're chosen because of what you told us matters to you.";
+
+  if(p2Container) {
+    let p2Html = '';
+
+    // One from Consider zone
+    if(amberPick) {
+      p2Html += `
+        <div class="rep-p2-section-lbl" style="color:#FFB347;margin-bottom:8px">From your Consider zone — worth watching</div>
+        ${domainCardHTML(amberPick, false)}
+        <div style="margin-bottom:18px"></div>`;
+    }
+
+    // One from Focus Later zone
+    if(grayPick) {
+      p2Html += `
+        <div class="rep-p2-section-lbl" style="color:#7A8A9A;margin-top:4px;margin-bottom:8px">From your Focus Later zone — lower urgency, still yours</div>
+        ${domainCardHTML(grayPick, false)}
+        <div style="margin-bottom:18px"></div>`;
+    }
+
+    // If neither amber nor gray exist, show the next two from sorted
+    if(!amberPick && !grayPick) {
+      const extras = sorted.slice(2, 4);
+      extras.forEach(d => {
+        p2Html += domainCardHTML(d, false) + '<div style="margin-bottom:12px"></div>';
+      });
+    }
+
+    // Subtle bridge to gate
+    p2Html += `<div style="text-align:center;padding:18px;border-radius:10px;border:0.5px dashed rgba(108,99,255,0.25);margin-top:8px">
+      <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:6px">Your remaining ${sorted.length - (amberPick?1:0) - (grayPick?1:0) - 1} domains, your full coaching plan, and your Next Season Watchlist are waiting.</div>
+      <button class="rep-gate-btn" style="padding:10px 24px;font-size:13px" onclick="document.getElementById('rep-gate').scrollIntoView({behavior:'smooth'})">Unlock the full report →</button>
+    </div>`;
+
+    p2Container.innerHTML = p2Html;
+  }
+}
+
+// ── UNLOCK REPORT ─────────────────────────────────────
+function unlockReport() {
+  const emailInput = document.getElementById('gate-email');
+  const email = emailInput ? emailInput.value.trim() : '';
+
+  // Validate email format (or allow skip via "View summary only" with empty)
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('Please enter a valid email address');
+    emailInput.focus();
+    return;
+  }
+
+  // Hide gate, show tier 2
+  const gate = document.getElementById('rep-gate');
+  const tier2 = document.getElementById('rep-tier2');
+  if (gate) gate.style.display = 'none';
+  if (tier2) tier2.classList.add('unlocked');
+
+  // Show unlock banner
+  const banner = document.getElementById('rep-unlock-banner');
+  if (banner) {
+    if (email) {
+      banner.innerHTML = `<span style="font-size:18px">✓</span><div><strong style="display:block;margin-bottom:2px">Welcome to the founding cohort.</strong>Your full report is unlocked. We'll follow up at <em>${email}</em> with a short feedback form. Thank you for being part of this.</div>`;
+    } else {
+      banner.innerHTML = `<span style="font-size:18px">→</span><div><strong style="display:block;margin-bottom:2px">Full report unlocked.</strong>You're viewing the complete Thrive Report. Want the full experience delivered to your inbox? <span style="color:#6C63FF;cursor:pointer;text-decoration:underline" onclick="document.getElementById('rep-tier2').scrollIntoView({behavior:'smooth'})">Enter your email above</span>.</div>`;
+    }
+  }
+
+  // Scroll to tier 2
+  setTimeout(() => {
+    if (tier2) tier2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 120);
+}
+
 window.addEventListener('resize',()=>{
   if(currentScreen==='model'&&renderer3){
     const canvas=document.getElementById('c3d');
