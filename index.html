@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- THRIVE BUILD: v38 — 11-question expanded questionnaire (deployed May 20 2026) -->
+<!-- THRIVE BUILD: v39 — cohort tagging + professional questionnaire for therapists/coaches/trainers (deployed May 26 2026) -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive · Life Assessment v8</title>
+<title>Thrive · Life Assessment v9</title>
 
 <!-- ═══════════════════════════════════════════════════════════════
      GOOGLE ANALYTICS 4  (live as of v29)
@@ -515,6 +515,17 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
 .fb-other-input{display:block;width:100%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;padding:10px 14px;font-size:13.5px;font-family:inherit;margin-top:10px;transition:border-color .15s}
 .fb-other-input:focus{outline:none;border-color:rgba(108,99,255,0.55)}
 .fb-other-input::placeholder{color:rgba(255,255,255,0.32)}
+/* v39: Conditional follow-up block (Q4 follow-up when rating ≥ 7, Q8 conditions when "Yes with conditions") */
+.fb-conditional-block{margin-top:14px;padding:14px 16px;background:rgba(108,99,255,0.06);border-left:2px solid rgba(108,99,255,0.45);border-radius:6px;animation:fbCondFadeIn .25s ease}
+.fb-conditional-label{font-size:12.5px;color:rgba(180,175,255,0.75);margin-bottom:8px;font-weight:500;letter-spacing:.01em}
+@keyframes fbCondFadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+/* v39: Cohort C welcome badge — non-intrusive, signals professional role */
+.welcome-pro-badge{display:none;background:linear-gradient(135deg,rgba(108,99,255,0.18),rgba(255,211,71,0.08));border:0.5px solid rgba(108,99,255,0.45);border-radius:10px;padding:14px 18px;margin:0 0 24px 0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,0.88);letter-spacing:.005em}
+.welcome-pro-badge.show{display:block}
+.welcome-pro-badge-title{font-weight:600;color:#9B96FF;margin-bottom:4px;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+/* v39: Partnership contact block at end of pro questionnaire */
+.fb-partnership-block{margin-top:20px;padding:18px 20px;background:rgba(255,211,71,0.04);border:0.5px solid rgba(255,211,71,0.20);border-radius:10px}
+.fb-partnership-label{font-size:12.5px;color:rgba(255,211,71,0.75);margin-bottom:10px;font-weight:500;letter-spacing:.01em}
 
 /* Textareas */
 .fb-textarea{width:100%;min-height:80px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.10);border-radius:10px;color:rgba(255,255,255,0.92);padding:12px 14px;font-size:14px;font-family:inherit;line-height:1.55;resize:vertical;transition:all .15s;box-sizing:border-box}
@@ -722,6 +733,7 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
 <form name="thrive-feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
   <input type="text"  name="session_id" />
   <input type="email" name="email" />
+  <input type="text"  name="cohort" />
   <input type="text"  name="submitted_at" />
   <input type="number" name="q1_resonance" />
   <input type="number" name="q2_nps" />
@@ -741,6 +753,40 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
   <input type="text"  name="demo_stage" />
   <input type="number" name="questions_answered_count" />
   <input type="number" name="demographics_answered_count" />
+  <input type="text" name="bot-field" /> <!-- Spam honeypot -->
+</form>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PROFESSIONAL FEEDBACK FORM (v39 — Cohort C: therapists/coaches/trainers)
+     ───────────────────────────────────────────────────────────────
+     Hidden form, used only when ?cohort=C (or C-{name}) is in URL.
+     Asks user-resonance questions + professional opinion + marketplace
+     potential + partnership interest. Submissions appear in Netlify
+     dashboard → Forms → "thrive-feedback-pro".
+     ═══════════════════════════════════════════════════════════════ -->
+<form name="thrive-feedback-pro" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text"  name="session_id" />
+  <input type="email" name="email" />
+  <input type="text"  name="cohort" />
+  <input type="text"  name="submitted_at" />
+  <input type="number" name="q1_resonance" />
+  <textarea name="q2_describe_to_colleague"></textarea>
+  <textarea name="q3_surprise"></textarea>
+  <input type="number" name="q4_recommend_to_clients" />
+  <textarea name="q4_recommend_support"></textarea>
+  <input type="text"  name="q5_practice_situations" />
+  <input type="text"  name="q5_practice_situations_other" />
+  <textarea name="q6_pro_requirements"></textarea>
+  <textarea name="q7_comparison"></textarea>
+  <input type="text"  name="q8_directory_interest" />
+  <textarea name="q8_directory_conditions"></textarea>
+  <input type="text"  name="q9_pricing_model" />
+  <input type="text"  name="q9_pricing_model_other" />
+  <input type="text"  name="q10_practice_area" />
+  <input type="text"  name="q10_practice_area_other" />
+  <textarea name="q11_good_outcome"></textarea>
+  <input type="email" name="q11_partnership_email" />
+  <input type="number" name="questions_answered_count" />
   <input type="text" name="bot-field" /> <!-- Spam honeypot -->
 </form>
 
@@ -772,6 +818,11 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
   <!-- Body copy -->
   <div class="welcome-hero">
     <div class="welcome-body">
+      <!-- v39: Cohort C professional reviewer badge (shown only if cohort starts with C) -->
+      <div class="welcome-pro-badge" id="welcome-pro-badge">
+        <div class="welcome-pro-badge-title">Professional Reviewer</div>
+        You're reviewing Thrive as a professional. Take the assessment as yourself first, then we'll ask about your professional perspective to help us refine Thrive.
+      </div>
       <div class="welcome-eyebrow">A clearer picture of where you actually are right now, and where you're heading.</div>
       <h1>Curious what your life actually looks like right now?</h1>
       <p class="welcome-sub">This is not a quiz. It's a mirror. Spend the next 10 minutes with honesty, and get the clearest picture of your life you've ever had.</p>
@@ -985,7 +1036,7 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
         <text x="0" y="218" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(255,255,255,0.32)">Pass</text>
       </g>
     </svg>
-    <div class="intro-caption">Five ways to say yes. One way to say not yet.</div>
+    <div class="intro-caption">Four ways to say yes. One way to say not yet.</div>
     <div class="intro-body">
       We all have limited resources: <em>time, energy, attention, money.</em> This is not about giving up on any area of life. It is about being <em>strategically honest</em> about where you can meaningfully invest right now.<br><br>
       Trying to work on everything leads to progress on nothing. The areas you set aside this season are not abandoned. They are <strong>waiting</strong>, and we will hold them for you in your <em>Next Season Watchlist</em>.
@@ -1565,6 +1616,176 @@ html,body{height:100%;background:#0A0A0F;font-family:system-ui,-apple-system,san
         </form>
         </div>
 
+        <!-- ═══════════════════════════════════════════════════════════════
+             v39: PROFESSIONAL QUESTIONNAIRE (Cohort C — therapists/coaches/trainers)
+             ───────────────────────────────────────────────────────────────
+             Hidden by default. JS shows this and hides #fb-form-container
+             when COHORT.toUpperCase().startsWith('C'). Submits to the
+             "thrive-feedback-pro" Netlify form (separate dashboard).
+             ═══════════════════════════════════════════════════════════════ -->
+        <div id="fb-form-container-pro" style="display:none">
+        <form class="fb-form" id="fb-form-pro" onsubmit="return submitFeedbackPro(event)">
+
+          <!-- Q1 (pro): Resonance — same scale, evaluates whether Thrive holds up even to trained eyes -->
+          <div class="fb-question" data-q="q1">
+            <div class="fb-q-num">Question 1 of 11</div>
+            <div class="fb-q-text">How well did this assessment reflect where you actually are in life right now?</div>
+            <div class="fb-scale-row" data-fb-scale-pro="q1_resonance" role="radiogroup" aria-label="Resonance, 1 to 10">
+              <button type="button" class="fb-scale-btn" data-val="1">1</button>
+              <button type="button" class="fb-scale-btn" data-val="2">2</button>
+              <button type="button" class="fb-scale-btn" data-val="3">3</button>
+              <button type="button" class="fb-scale-btn" data-val="4">4</button>
+              <button type="button" class="fb-scale-btn" data-val="5">5</button>
+              <button type="button" class="fb-scale-btn" data-val="6">6</button>
+              <button type="button" class="fb-scale-btn" data-val="7">7</button>
+              <button type="button" class="fb-scale-btn" data-val="8">8</button>
+              <button type="button" class="fb-scale-btn" data-val="9">9</button>
+              <button type="button" class="fb-scale-btn" data-val="10">10</button>
+            </div>
+            <div class="fb-scale-labels"><span>Not at all</span><span>Exactly</span></div>
+          </div>
+
+          <!-- Q2 (pro): Describe to a colleague — pro-to-pro framing for B2B marketing copy -->
+          <div class="fb-question" data-q="q2">
+            <div class="fb-q-num">Question 2 of 11</div>
+            <div class="fb-q-text">In 1–2 sentences, how would you describe Thrive Assessment to a colleague in your field?</div>
+            <textarea class="fb-textarea" name="q2_describe_to_colleague_inline" placeholder="Your professional-to-professional framing." rows="3"></textarea>
+          </div>
+
+          <!-- Q3 (pro): Surprise -->
+          <div class="fb-question" data-q="q3">
+            <div class="fb-q-num">Question 3 of 11</div>
+            <div class="fb-q-text">Did anything about your own results surprise you?</div>
+            <textarea class="fb-textarea" name="q3_surprise_pro_inline" placeholder="Even seasoned eyes can catch something unexpected." rows="3"></textarea>
+          </div>
+
+          <!-- Q4 (pro): Recommend to clients (1-10) — THE key marketplace signal. Conditional follow-up if ≥7 -->
+          <div class="fb-question" data-q="q4">
+            <div class="fb-q-num">Question 4 of 11</div>
+            <div class="fb-q-text">How likely would you be to recommend Thrive to your clients or students?</div>
+            <div class="fb-scale-row" data-fb-scale-pro="q4_recommend_to_clients" data-conditional-threshold="7" data-conditional-target="q4-followup" role="radiogroup" aria-label="Recommend, 1 to 10">
+              <button type="button" class="fb-scale-btn" data-val="1">1</button>
+              <button type="button" class="fb-scale-btn" data-val="2">2</button>
+              <button type="button" class="fb-scale-btn" data-val="3">3</button>
+              <button type="button" class="fb-scale-btn" data-val="4">4</button>
+              <button type="button" class="fb-scale-btn" data-val="5">5</button>
+              <button type="button" class="fb-scale-btn" data-val="6">6</button>
+              <button type="button" class="fb-scale-btn" data-val="7">7</button>
+              <button type="button" class="fb-scale-btn" data-val="8">8</button>
+              <button type="button" class="fb-scale-btn" data-val="9">9</button>
+              <button type="button" class="fb-scale-btn" data-val="10">10</button>
+            </div>
+            <div class="fb-scale-labels"><span>Not at all likely</span><span>Definitely would</span></div>
+
+            <!-- Conditional follow-up: appears only when Q4 rating ≥ 7 -->
+            <div class="fb-conditional-block" id="q4-followup" style="display:none">
+              <div class="fb-conditional-label">How could Thrive support your clients in their journey?</div>
+              <textarea class="fb-textarea" name="q4_recommend_support_inline" placeholder="Specific use cases, client situations, what they'd get from it..." rows="3"></textarea>
+            </div>
+          </div>
+
+          <!-- Q5 (pro): Practice situations (multi-select) -->
+          <div class="fb-question" data-q="q5">
+            <div class="fb-q-num">Question 5 of 11</div>
+            <div class="fb-q-text">In what situations would Thrive be most useful in your practice?</div>
+            <div class="fb-q-hint">Select all that apply</div>
+            <div class="fb-pill-row" data-fb-pills-multi-pro="q5_practice_situations" role="group" aria-label="Practice situations">
+              <button type="button" class="fb-pill" data-val="Initial intake / discovery session with new clients">Initial intake / discovery session with new clients</button>
+              <button type="button" class="fb-pill" data-val="Progress check-ins or milestone reviews">Progress check-ins or milestone reviews</button>
+              <button type="button" class="fb-pill" data-val="Couples or family work">Couples or family work</button>
+              <button type="button" class="fb-pill" data-val="Goal-setting and coaching commitment">Goal-setting and coaching commitment</button>
+              <button type="button" class="fb-pill" data-val="Triage — understanding scope of work needed">Triage — understanding scope of work needed</button>
+              <button type="button" class="fb-pill" data-val="I wouldn't use it with clients">I wouldn't use it with clients</button>
+              <button type="button" class="fb-pill" data-val="Other" data-other-input="q5_practice_situations_other">Other</button>
+            </div>
+            <input type="text" class="fb-other-input" data-other-for="q5_practice_situations" name="q5_practice_situations_other_inline" placeholder="What other situation?" style="display:none">
+          </div>
+
+          <!-- Q6 (pro): Pro requirements -->
+          <div class="fb-question" data-q="q6">
+            <div class="fb-q-num">Question 6 of 11</div>
+            <div class="fb-q-text">What would Thrive need to include for you to use it professionally?</div>
+            <textarea class="fb-textarea" name="q6_pro_requirements_inline" placeholder="Features, formats, integrations, anything that would make it work for your practice." rows="4"></textarea>
+          </div>
+
+          <!-- Q7 (pro): Comparison to other tools -->
+          <div class="fb-question" data-q="q7">
+            <div class="fb-q-num">Question 7 of 11</div>
+            <div class="fb-q-text">How does this compare to assessment tools you currently use? (if any)</div>
+            <textarea class="fb-textarea" name="q7_comparison_inline" placeholder="What you use now, how Thrive sits against it. 'I don't use any' is a useful answer too." rows="3"></textarea>
+          </div>
+
+          <!-- Q8 (pro): Directory interest (single select) + conditional conditions field -->
+          <div class="fb-question" data-q="q8">
+            <div class="fb-q-num">Question 8 of 11</div>
+            <div class="fb-q-text">If Thrive launched a directory connecting clients to specialists like you, would you want to be listed?</div>
+            <div class="fb-pill-row" data-fb-pills-pro="q8_directory_interest" data-conditional-value="Yes, with certain conditions" data-conditional-target="q8-followup" role="radiogroup" aria-label="Directory interest">
+              <button type="button" class="fb-pill" data-val="Yes, definitely">Yes, definitely</button>
+              <button type="button" class="fb-pill" data-val="Yes, with certain conditions">Yes, with certain conditions</button>
+              <button type="button" class="fb-pill" data-val="Maybe — I'd want to know more">Maybe — I'd want to know more</button>
+              <button type="button" class="fb-pill" data-val="No">No</button>
+            </div>
+
+            <!-- Conditional follow-up: only appears when "Yes, with certain conditions" selected -->
+            <div class="fb-conditional-block" id="q8-followup" style="display:none">
+              <div class="fb-conditional-label">What conditions matter to you?</div>
+              <textarea class="fb-textarea" name="q8_directory_conditions_inline" placeholder="E.g. client fit, listing visibility, pricing model, opt-out controls..." rows="3"></textarea>
+            </div>
+          </div>
+
+          <!-- Q9 (pro): Pricing model (multi-select) -->
+          <div class="fb-question" data-q="q9">
+            <div class="fb-q-num">Question 9 of 11</div>
+            <div class="fb-q-text">What pricing model would work for your practice if you used Thrive professionally?</div>
+            <div class="fb-q-hint">Select all that apply</div>
+            <div class="fb-pill-row" data-fb-pills-multi-pro="q9_pricing_model" role="group" aria-label="Pricing model">
+              <button type="button" class="fb-pill" data-val="Free for me, paid by client">Free for me, paid by client</button>
+              <button type="button" class="fb-pill" data-val="Subscription model for me, free for clients">Subscription for me, free for clients</button>
+              <button type="button" class="fb-pill" data-val="Per-client or per-report pricing">Per-client or per-report pricing</button>
+              <button type="button" class="fb-pill" data-val="Referral fee for client matches I get through Thrive">Referral fee for client matches</button>
+              <button type="button" class="fb-pill" data-val="Revenue share on client work that comes through Thrive">Revenue share on client work</button>
+              <button type="button" class="fb-pill" data-val="I wouldn't pay for professional use">I wouldn't pay for professional use</button>
+              <button type="button" class="fb-pill" data-val="Other" data-other-input="q9_pricing_model_other">Other</button>
+            </div>
+            <input type="text" class="fb-other-input" data-other-for="q9_pricing_model" name="q9_pricing_model_other_inline" placeholder="What other model?" style="display:none">
+          </div>
+
+          <!-- Q10 (pro): Practice area (single select with Other) -->
+          <div class="fb-question" data-q="q10">
+            <div class="fb-q-num">Question 10 of 11</div>
+            <div class="fb-q-text">What's your primary practice area?</div>
+            <div class="fb-pill-row" data-fb-pills-pro="q10_practice_area" role="radiogroup" aria-label="Practice area">
+              <button type="button" class="fb-pill" data-val="Therapist / psychologist">Therapist / psychologist</button>
+              <button type="button" class="fb-pill" data-val="Life coach">Life coach</button>
+              <button type="button" class="fb-pill" data-val="Career coach">Career coach</button>
+              <button type="button" class="fb-pill" data-val="Fitness, wellness, or health trainer">Fitness, wellness, or health trainer</button>
+              <button type="button" class="fb-pill" data-val="Financial advisor or coach">Financial advisor or coach</button>
+              <button type="button" class="fb-pill" data-val="Other" data-other-input="q10_practice_area_other">Other</button>
+            </div>
+            <input type="text" class="fb-other-input" data-other-for="q10_practice_area" name="q10_practice_area_other_inline" placeholder="What area?" style="display:none">
+          </div>
+
+          <!-- Q11 (pro): Good outcome + optional partnership email -->
+          <div class="fb-question" data-q="q11">
+            <div class="fb-q-num">Question 11 of 11</div>
+            <div class="fb-q-text">What would a "good outcome" look like for you in a professional partnership with Thrive?</div>
+            <textarea class="fb-textarea" name="q11_good_outcome_inline" placeholder="What success would look like — for you, your clients, your practice. Helli reads every response." rows="4"></textarea>
+
+            <!-- Optional partnership contact field — separate from assessment email -->
+            <div class="fb-partnership-block">
+              <div class="fb-partnership-label">If you'd like Helli to reach out about partnership opportunities, share your best contact email below (optional).</div>
+              <input type="email" class="fb-other-input" name="q11_partnership_email_inline" placeholder="your.email@example.com" style="margin-top:0">
+            </div>
+          </div>
+
+          <div class="fb-submit-row">
+            <button type="submit" class="fb-submit-btn" id="fb-submit-btn-pro">Submit my professional review →</button>
+            <div class="fb-progress"><strong id="fb-answered-count-pro">0</strong> of 11 answered &nbsp;·&nbsp; all questions optional</div>
+          </div>
+
+        </form>
+        </div>
+
         <!-- Thank-you state (shown after submit) -->
         <div id="fb-thanks-container" class="fb-thanks" hidden>
           <div class="fb-thanks-icon">✦</div>
@@ -1632,22 +1853,45 @@ const SESSION_ID = (function(){
   return id;
 })();
 
+// ═══════════════════════════════════════════════════════════════
+// COHORT TAGGING (v39)
+// ───────────────────────────────────────────────────────────────
+// Captures ?cohort=X from URL on first visit, persists in
+// sessionStorage so it survives navigation within the session.
+// Values: "A" (Iranian diaspora, may be implicit), "B" (non-Iranian
+// end users), "C" or "C-{name}" (therapists/coaches/trainers).
+// Pro questionnaire shown when cohort starts with "C".
+// Cohort propagates to GA4 (user_property), Clarity (custom tag),
+// and Netlify Forms (separate forms for end-user vs pro).
+// ═══════════════════════════════════════════════════════════════
+const COHORT = (function(){
+  // Only set from URL on first visit; preserve sessionStorage on later loads
+  const stored = sessionStorage.getItem('thrive_cohort');
+  if (stored) return stored;
+  const urlCohort = new URLSearchParams(window.location.search).get('cohort');
+  const tag = urlCohort ? urlCohort.trim().slice(0, 60) : 'unknown'; // cap length defensively
+  sessionStorage.setItem('thrive_cohort', tag);
+  return tag;
+})();
+const IS_PRO_COHORT = COHORT.toUpperCase().startsWith('C');
+
 // Track which events have fired so we never double-count
 const _firedEvents = new Set();
 const _stepStartTimes = {};
 
-// Tell GA4 about the session_id so events join up later
+// Tell GA4 about the session_id and cohort so events join up later
 if (typeof gtag === 'function') {
   gtag('set', { 'user_id': SESSION_ID });
-  gtag('set', 'user_properties', { 'thrive_session_id': SESSION_ID });
+  gtag('set', 'user_properties', { 'thrive_session_id': SESSION_ID, 'cohort': COHORT });
 }
 
 // v36: Tell Microsoft Clarity about the session_id so recordings are joinable
 // to GA4 events and Netlify Form submissions. Clarity's `set` API queues calls
 // even before the Clarity script finishes loading, so this is safe here.
-// In the Clarity dashboard, filter recordings by Custom Tag: session_id.
+// In the Clarity dashboard, filter recordings by Custom Tag: session_id or cohort.
 if (typeof clarity === 'function') {
   clarity('set', 'session_id', SESSION_ID);
+  clarity('set', 'cohort', COHORT); // v39: cohort segmentation in Clarity
 }
 
 function trackEvent(eventName, extraParams) {
@@ -1655,6 +1899,7 @@ function trackEvent(eventName, extraParams) {
   _firedEvents.add(eventName);
   const params = Object.assign({
     session_id: SESSION_ID,
+    cohort: COHORT,
     seconds_since_start: Math.round((Date.now() - parseInt(sessionStorage.getItem('thrive_session_start')||Date.now()))/1000)
   }, extraParams || {});
   if (typeof gtag === 'function') {
@@ -1681,7 +1926,13 @@ function trackStepDuration(stepName) {
 
 // Fire assessment_started as soon as the page is interactive
 window.addEventListener('DOMContentLoaded', function(){
-  console.log('%c✦ THRIVE v38 — 11-question expanded questionnaire', 'color:#9B96FF;font-weight:bold;font-size:13px;');
+  console.log('%c✦ THRIVE v39 — cohort tagging + professional questionnaire', 'color:#9B96FF;font-weight:bold;font-size:13px;');
+  console.log('%cCohort: ' + COHORT + (IS_PRO_COHORT ? ' (professional reviewer)' : ' (end user)'), 'color:#FFD347;font-size:11px;');
+  // v39: Show cohort C professional reviewer badge on welcome screen
+  if (IS_PRO_COHORT) {
+    const badge = document.getElementById('welcome-pro-badge');
+    if (badge) badge.classList.add('show');
+  }
   trackEvent('assessment_started');
   trackStepTiming('welcome');
 });
@@ -3514,6 +3765,23 @@ function wireFeedbackButton() {
   if (!wrapper) return;
   wrapper.style.display = '';  // always show — feedback is now inline
 
+  // v39: Cohort routing — if pro cohort, swap to pro form + adjust intro text, then wire pro form
+  if (IS_PRO_COHORT) {
+    const userForm = document.getElementById('fb-form-container');
+    const proForm  = document.getElementById('fb-form-container-pro');
+    if (userForm) userForm.style.display = 'none';
+    if (proForm)  proForm.style.display = 'block';
+    // Adjust the wrapper's intro text for pros
+    const eyebrow = wrapper.querySelector('.rep-feedback-eyebrow');
+    const headline = wrapper.querySelector('.rep-feedback-headline');
+    const body = wrapper.querySelector('.rep-feedback-body');
+    if (eyebrow)  eyebrow.textContent = 'Professional Reviewer Cohort';
+    if (headline) headline.textContent = 'Your professional insight shapes what Thrive becomes.';
+    if (body)     body.innerHTML = "You've just taken Thrive as yourself. Now we'd love your perspective <em>as a professional</em>. Your views on use cases, marketplace potential, and partnership help us understand where Thrive can have the most impact. <em>Every question is optional. Skip what doesn't fit.</em>";
+    wireFeedbackButtonPro();
+    return; // skip end-user wiring entirely
+  }
+
   // Wire 1-10 scale rows (Q1, Q2)
   document.querySelectorAll('[data-fb-scale]').forEach(row => {
     const qKey = row.getAttribute('data-fb-scale');
@@ -3627,6 +3895,294 @@ function wireFeedbackButton() {
   });
 }
 
+// ═══════════════════════════════════════════════════════════════
+// v39: PRO QUESTIONNAIRE STATE & WIRING
+// ───────────────────────────────────────────────────────────────
+// Mirrors wireFeedbackButton() but for the Cohort C (professional)
+// form: thrive-feedback-pro. Separate state object so end-user
+// and pro answers never collide. Handles:
+//   - 1-10 scale rows with conditional follow-up trigger (Q4)
+//   - Single-select pills with conditional follow-up (Q8)
+//   - Multi-select pills with "Other" → text input (Q5, Q9, Q10)
+//   - Textareas (Q2, Q3, Q6, Q7, Q11) + partnership email
+// ═══════════════════════════════════════════════════════════════
+const _fbProState = {};
+const _fbProMultiState = {};
+const _fbProQTracked = new Set();
+const FB_PRO_KEYS = [
+  'q1_resonance','q2_describe_to_colleague','q3_surprise','q4_recommend_to_clients',
+  'q5_practice_situations','q6_pro_requirements','q7_comparison','q8_directory_interest',
+  'q9_pricing_model','q10_practice_area','q11_good_outcome'
+];
+
+function _fbProMarkAnswered(qKey, qNum) {
+  if (_fbProQTracked.has(qNum)) return;
+  _fbProQTracked.add(qNum);
+  const eventName = 'feedback_pro_q' + qNum + '_answered';
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, { session_id: SESSION_ID, cohort: COHORT, question_key: qKey });
+  }
+}
+
+function _fbProUpdateProgress() {
+  const total = FB_PRO_KEYS.filter(k => _fbProState[k] !== '' && _fbProState[k] !== null && _fbProState[k] !== undefined).length;
+  const el = document.getElementById('fb-answered-count-pro');
+  if (el) el.textContent = total;
+}
+
+function wireFeedbackButtonPro() {
+  // Scale rows (Q1, Q4) — Q4 has a conditional follow-up when rating ≥ threshold
+  document.querySelectorAll('[data-fb-scale-pro]').forEach(row => {
+    const qKey = row.getAttribute('data-fb-scale-pro');
+    const qNum = row.closest('.fb-question').getAttribute('data-q').replace('q','');
+    const threshold = row.getAttribute('data-conditional-threshold');
+    const targetId  = row.getAttribute('data-conditional-target');
+    row.querySelectorAll('.fb-scale-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        row.querySelectorAll('.fb-scale-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const val = this.getAttribute('data-val');
+        _fbProState[qKey] = val;
+        _fbProMarkAnswered(qKey, qNum);
+        // Conditional follow-up handling (e.g. Q4 ≥ 7 reveals client-support textarea)
+        if (threshold && targetId) {
+          const target = document.getElementById(targetId);
+          if (target) {
+            if (parseInt(val, 10) >= parseInt(threshold, 10)) {
+              target.style.display = 'block';
+            } else {
+              target.style.display = 'none';
+              // Clear the conditional text when hidden so we don't submit stale data
+              const ta = target.querySelector('textarea');
+              if (ta) {
+                ta.value = '';
+                _fbProState['q4_recommend_support'] = '';
+              }
+            }
+          }
+        }
+        _fbProUpdateProgress();
+      });
+    });
+  });
+
+  // Single-select pill rows (Q8 with conditional, Q10) and any other single-selects
+  document.querySelectorAll('[data-fb-pills-pro]').forEach(row => {
+    const qKey = row.getAttribute('data-fb-pills-pro');
+    const qNum = row.closest('.fb-question').getAttribute('data-q').replace('q','');
+    const conditionalValue = row.getAttribute('data-conditional-value');
+    const conditionalTarget = row.getAttribute('data-conditional-target');
+    // Determine "Other" input for single-select with Other pill (e.g. Q10)
+    const otherInput = document.querySelector('.fb-other-input[data-other-for="' + qKey + '"]');
+    row.querySelectorAll('.fb-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        row.querySelectorAll('.fb-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const val = this.getAttribute('data-val');
+        _fbProState[qKey] = val;
+        _fbProMarkAnswered(qKey, qNum);
+        // Handle "Yes, with certain conditions" → show conditions textarea (Q8)
+        if (conditionalValue && conditionalTarget) {
+          const target = document.getElementById(conditionalTarget);
+          if (target) {
+            if (val === conditionalValue) {
+              target.style.display = 'block';
+            } else {
+              target.style.display = 'none';
+              const ta = target.querySelector('textarea');
+              if (ta) {
+                ta.value = '';
+                _fbProState['q8_directory_conditions'] = '';
+              }
+            }
+          }
+        }
+        // Handle "Other" pill on Q10 → show text input
+        const isOther = this.getAttribute('data-other-input');
+        if (otherInput) {
+          if (isOther) {
+            otherInput.style.display = 'block';
+            setTimeout(() => otherInput.focus(), 50);
+          } else {
+            otherInput.style.display = 'none';
+            otherInput.value = '';
+            _fbProState[qKey + '_other'] = '';
+          }
+        }
+        _fbProUpdateProgress();
+      });
+    });
+    // Wire the Other input itself
+    if (otherInput) {
+      otherInput.addEventListener('input', function() {
+        _fbProState[qKey + '_other'] = this.value.trim();
+      });
+    }
+  });
+
+  // Multi-select pill rows (Q5, Q9) — no cap; "Other" reveals text input
+  document.querySelectorAll('[data-fb-pills-multi-pro]').forEach(row => {
+    const qKey = row.getAttribute('data-fb-pills-multi-pro');
+    const qNum = row.closest('.fb-question').getAttribute('data-q').replace('q','');
+    if (!_fbProMultiState[qKey]) _fbProMultiState[qKey] = [];
+    const otherInput = document.querySelector('.fb-other-input[data-other-for="' + qKey + '"]');
+
+    row.querySelectorAll('.fb-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        const val = this.getAttribute('data-val');
+        const isOther = this.getAttribute('data-other-input');
+        const picks = _fbProMultiState[qKey];
+        const idx = picks.indexOf(val);
+        if (idx >= 0) {
+          picks.splice(idx, 1);
+          this.classList.remove('active');
+          if (isOther && otherInput) {
+            otherInput.style.display = 'none';
+            otherInput.value = '';
+            _fbProState[qKey + '_other'] = '';
+          }
+        } else {
+          picks.push(val);
+          this.classList.add('active');
+          if (isOther && otherInput) {
+            otherInput.style.display = 'block';
+            setTimeout(() => otherInput.focus(), 50);
+          }
+        }
+        _fbProState[qKey] = picks.join(' | ');
+        if (picks.length > 0) _fbProMarkAnswered(qKey, qNum);
+        _fbProUpdateProgress();
+      });
+    });
+    if (otherInput) {
+      otherInput.addEventListener('input', function() {
+        _fbProState[qKey + '_other'] = this.value.trim();
+      });
+    }
+  });
+
+  // Textareas (Q2, Q3, Q6, Q7, Q11) + partnership email field
+  const textareaMap = {
+    q2_describe_to_colleague_inline: { key: 'q2_describe_to_colleague', num: '2' },
+    q3_surprise_pro_inline:          { key: 'q3_surprise',              num: '3' },
+    q4_recommend_support_inline:     { key: 'q4_recommend_support',     num: '4' }, // conditional, no separate count
+    q6_pro_requirements_inline:      { key: 'q6_pro_requirements',      num: '6' },
+    q7_comparison_inline:            { key: 'q7_comparison',            num: '7' },
+    q8_directory_conditions_inline:  { key: 'q8_directory_conditions',  num: '8' }, // conditional
+    q11_good_outcome_inline:         { key: 'q11_good_outcome',         num: '11' }
+  };
+  Object.keys(textareaMap).forEach(name => {
+    const ta = document.querySelector('textarea[name="' + name + '"]');
+    if (!ta) return;
+    const cfg = textareaMap[name];
+    ta.addEventListener('input', function() {
+      _fbProState[cfg.key] = this.value.trim();
+      // Only mark answered for primary questions (not conditional follow-ups)
+      if (this.value.trim().length > 0 && FB_PRO_KEYS.indexOf(cfg.key) >= 0) {
+        _fbProMarkAnswered(cfg.key, cfg.num);
+      }
+      _fbProUpdateProgress();
+    });
+  });
+
+  // Partnership email (optional) — not counted in progress, but captured on submit
+  const partnerEmail = document.querySelector('input[name="q11_partnership_email_inline"]');
+  if (partnerEmail) {
+    partnerEmail.addEventListener('input', function() {
+      _fbProState['q11_partnership_email'] = this.value.trim();
+    });
+  }
+}
+
+// v39: Submit handler for Cohort C (professional) — posts to thrive-feedback-pro form.
+// Reuses the same 3-tier fallback strategy as submitFeedback (URL-encoded fetch →
+// multipart fetch → hidden iframe form post) so we get max compatibility with Netlify.
+async function submitFeedbackPro(event) {
+  if (event) event.preventDefault();
+  const submitBtn = document.getElementById('fb-submit-btn-pro');
+  const originalText = submitBtn ? submitBtn.textContent : '';
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+  const answered = FB_PRO_KEYS.filter(k => _fbProState[k] !== '' && _fbProState[k] !== null && _fbProState[k] !== undefined).length;
+
+  const submittedEmail = sessionStorage.getItem('thrive_submitted_email') || '';
+  const formData = {
+    'form-name': 'thrive-feedback-pro',
+    'session_id': SESSION_ID,
+    'email': submittedEmail,
+    'cohort': COHORT,
+    'submitted_at': new Date().toISOString(),
+    'q1_resonance':                    _fbProState.q1_resonance                    || '',
+    'q2_describe_to_colleague':        _fbProState.q2_describe_to_colleague        || '',
+    'q3_surprise':                     _fbProState.q3_surprise                     || '',
+    'q4_recommend_to_clients':         _fbProState.q4_recommend_to_clients         || '',
+    'q4_recommend_support':            _fbProState.q4_recommend_support            || '',
+    'q5_practice_situations':          _fbProState.q5_practice_situations          || '',
+    'q5_practice_situations_other':    _fbProState.q5_practice_situations_other    || '',
+    'q6_pro_requirements':             _fbProState.q6_pro_requirements             || '',
+    'q7_comparison':                   _fbProState.q7_comparison                   || '',
+    'q8_directory_interest':           _fbProState.q8_directory_interest           || '',
+    'q8_directory_conditions':         _fbProState.q8_directory_conditions         || '',
+    'q9_pricing_model':                _fbProState.q9_pricing_model                || '',
+    'q9_pricing_model_other':          _fbProState.q9_pricing_model_other          || '',
+    'q10_practice_area':               _fbProState.q10_practice_area               || '',
+    'q10_practice_area_other':         _fbProState.q10_practice_area_other         || '',
+    'q11_good_outcome':                _fbProState.q11_good_outcome                || '',
+    'q11_partnership_email':           _fbProState.q11_partnership_email           || '',
+    'questions_answered_count':        answered
+  };
+  const body = Object.keys(formData)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(formData[k]))
+    .join('&');
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body
+    });
+    if (!res.ok) {
+      console.error('[Thrive pro feedback] Primary failed (' + res.status + '), trying multipart...');
+      const fd = new FormData();
+      Object.keys(formData).forEach(k => fd.append(k, formData[k]));
+      const res2 = await fetch('/', { method: 'POST', body: fd });
+      if (!res2.ok) {
+        console.error('[Thrive pro feedback] Multipart failed (' + res2.status + '), trying iframe fallback...');
+        const iframeOk = await submitFeedbackViaIframe(formData);
+        if (!iframeOk) {
+          console.error('[Thrive pro feedback] All three submission paths failed. Verify "thrive-feedback-pro" form is detected in Netlify dashboard.');
+          throw new Error('HTTP ' + res2.status);
+        }
+        console.log('[Thrive pro feedback] Iframe fallback succeeded.');
+      } else {
+        console.log('[Thrive pro feedback] Multipart fallback succeeded.');
+      }
+    } else {
+      console.log('[Thrive pro feedback] Primary submission succeeded.');
+    }
+
+    trackEvent('feedback_pro_submitted', { questions_answered: answered });
+    if (typeof gtag === 'function') {
+      gtag('event', 'feedback_pro_submitted', {
+        session_id: SESSION_ID,
+        cohort: COHORT,
+        questions_answered: answered
+      });
+    }
+    const proForm = document.getElementById('fb-form-container-pro');
+    const thanksC = document.getElementById('fb-thanks-container');
+    if (proForm)  proForm.style.display = 'none';
+    if (thanksC)  thanksC.hidden = false;
+    if (thanksC)  thanksC.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    console.log('[Thrive] Pro feedback submission successful');
+  } catch (e) {
+    console.error('Pro feedback submission failed:', e);
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
+    showToast('Could not send your feedback. Please try again, or reply to our email.');
+  }
+  return false;
+}
+
 // v34: Third-tier fallback for feedback submission. When both URL-encoded fetch
 // and multipart FormData fetch fail (likely a CORS/security/CDN edge issue),
 // we fall back to a hidden iframe + dynamic form + native form.submit().
@@ -3706,6 +4262,7 @@ async function submitFeedback(event) {
     'form-name': 'thrive-feedback',
     'session_id': SESSION_ID,
     'email': submittedEmail,
+    'cohort': COHORT,
     'submitted_at': new Date().toISOString(),
     'q1_resonance':            _fbState.q1_resonance            || '',
     'q2_nps':                  _fbState.q2_nps                  || '',
